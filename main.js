@@ -48,6 +48,7 @@ if (!fs.existsSync('./collection')) { fs.mkdirSync('./collection') }
 backup.prepare('SELECT * FROM cards ORDER BY card').all().forEach((row) => {
   const card = {
     id: row.card,
+    foil: row.foil,
     image: row.image,
     quantity: row.quantity,
     language: row.language,
