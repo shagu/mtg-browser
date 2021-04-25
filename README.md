@@ -1,10 +1,10 @@
 # mtg-browser
 
-A small node.js project that allows to export scans of your [Magic: The Gathering](https://magic.wizards.com/) card collection to plain images and a simple and responsive html-site to browse, filter and search for specific cards. One of the goals is, to make it easier to build decks (todo) out of your local collection and to keep track of your cards. This is the successor of [delver-export](https://github.com/shagu/delver-export) and a partial rewrite from Lua to Node.js.
+A small node.js project that allows to export scans of your [Magic: The Gathering](https://magic.wizards.com) card collection to plain images and a simple and responsive html-site to browse, filter and search for specific cards. One of the goals is, to make it easier to build decks (todo) out of your local collection and to keep track of your cards. This is the successor of [delver-export](https://github.com/shagu/delverexport) and a partial rewrite from [Lua](https://www.lua.org) to [Node.js](https://nodejs.org).
 
 ### Supported Card Scanners
 
-  - [DelverLens](https://www.delverlab.com/) - MTG Card Scanner
+  - [DelverLens](https://www.delverlab.com) - MTG Card Scanner
 
 ## Install
 
