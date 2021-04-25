@@ -2,5 +2,8 @@
   "dependencies": {
     "better-sqlite3": "^7.1.5",
     "pdfkit": "^0.12.1"
+  },
+  "devDependencies": {
+    "standard": "^16.0.3"
   }
 }
