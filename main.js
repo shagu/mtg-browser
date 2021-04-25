@@ -103,7 +103,7 @@ cards.forEach((card) => {
   for (let i = card.quantity; i > 0; i--) {
     /* increase card counter if already existing */
     let offset = 0
-    const ipattern = `\{${card.color}\} ${card.name.replaceAll('/', '|')} \{${card.types}\} (%s)`
+    const ipattern = `{${card.color}} ${card.name.replaceAll('/', '|')} {${card.types}} (%s)`
 
     while (collection[util.format(ipattern, (i + offset))]) {
       offset++
