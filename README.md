@@ -1,6 +1,6 @@
 # mtg-browser
 
-A small node.js project that allows to export your magic collection scans to your filesystem [1] and also provides a simple html-site [2] to filter and search for specific cards. The goal is it to make it easier to build decks out of your local collection (todo). This is the successor of [delver-export](https://github.com/shagu/delver-export).
+A small node.js project that allows to export your magic collection scans to your filesystem and also provides a simple html-site to browse, filter and search for specific cards. The goal is it to make it easier to build decks out of your local collection (todo). This is the successor of [delver-export](https://github.com/shagu/delver-export) and partial rewrite from Lua to Node.js.
 
 ## Supported Card Scanners
 
@@ -12,25 +12,27 @@ A small node.js project that allows to export your magic collection scans to you
     cd mtg-browser
     npm install
 
-Now place your DelverLens backup file and the latest APK into the `input` directory (See [input/README.md](input/README.md) for details).
-To process your collection, type `make`
+Now place your DelverLens backup file and the latest APK into the "`input`" directory (Check the [the input readme](input/README.md) for further details).
+To start the process to prepare your collection, type:
 
     make
 
 Possible `make` targets are:
 
-  - `make` - *Runs update, clean and core*
-  - `make update` - *Download MTGJSON data, extract Delver's built-in database and prepares your backup*
-  - `make core` - *Only run the main programm*
-  - `make clean` - *Clean the `./collection` folder*
-  - `make distclean` - *Clean the `./collection` folder and reset everything done by `make update`*
+  - "`make`" - *Runs update, clean and core*
+  - "`make update`" - *Download MTGJSON data, extract Delver's built-in database and prepares your backup*
+  - "`make core`" - *Only run the main programm*
+  - "`make clean`" - *Clean the `./collection` folder*
+  - "`make distclean`" - *Clean the `./collection` folder and reset everything done by `make update`*
 
 ## Preview
 
-Once the `make` command returned successfully, the [index.html](index.html) can be opened in any browser, to display the frontend:
+Once the `make` command returned successfully, the local "[index.html](index.html)" can be opened in any browser, to display the frontend:
+
 ![preview.jpg](preview.jpg)
 
-The files in the `./collection` folder, have the following format: `{Color} Name {Type} (count)`:
+The files in the `./collection` folder, have the following format: "`{Color} Name {Type} (count)`", where "count" is an increasing identifier for each duplicate card:
+
 ![files.png](files.png)
 
 ## Thanks
