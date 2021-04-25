@@ -1,4 +1,5 @@
 node_modules
 collection
 cache
-input
+input/*.bin
+input/*.apk
