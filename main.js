@@ -8,7 +8,15 @@ const sqlite3 = require('better-sqlite3')
 
 /* main config */
 const config = {
+  // write PDF file with attached JSON
   'writePDF': null,
+
+  // 1: lists, 2: decks, 3: want
+  'delver-lists': {
+    1: true,
+    2: false,
+    3: false,
+  }
 }
 
 /* initialize arrays */
@@ -28,7 +36,7 @@ let oracle2multiverse = mtgjson.prepare('SELECT multiverseid FROM cards WHERE sc
 let set2setname = mtgjson.prepare('SELECT name, releaseDate FROM sets WHERE code = ?')
 let uuid2locale = mtgjson.prepare('SELECT name, text FROM foreign_data WHERE uuid = ? AND language = ?')
 let delver2scry = delver.prepare('SELECT scryfall_id FROM cards WHERE _id = ?')
-let count = backup.prepare('SELECT COUNT(*) AS count FROM cards').get().count
+let backup2list = backup.prepare('SELECT category from lists where _id = ?')
 
 let current = 1
 let overall = 0
@@ -43,11 +51,16 @@ backup.prepare('SELECT * FROM cards ORDER BY card').all().forEach((row) => {
     'image': row.image,
     'quantity': row.quantity,
     'language': row.language,
+    'category': backup2list.get(row.list).category
   }
 
   /* read scryfall id from delver database */
   card.scryfall = delver2scry.get(card.id).scryfall_id
-  cards.push(card)
+
+  /* only add defined lists to collection */
+  if(config['delver-lists'][card.category]) {
+    cards.push(card)
+  }
 })
 
 /* add jsondata and write outputs */
@@ -126,7 +139,7 @@ cards.forEach((card) => {
   }
 
   process.stdout.write(''.padEnd(process.stdout.columns, ' ') + '\r')
-  process.stdout.write('[' + current + '/' + count + '] ' + card.name + '\r')
+  process.stdout.write('[' + current + '/' + cards.length + '] ' + card.name + '\r')
   current++
 })
 
