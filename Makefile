@@ -15,6 +15,14 @@ core:
 
 clean:
 	rm -rf collection/*
+	rm -rf www/*
 
 distclean: clean
 	rm -rf cache
+
+www: update clean core
+	@echo "Writing website to ./www/"
+	@mkdir -p www
+	@cp index.html www/
+	@cp -r collection www/
+	@cp -r res www/
