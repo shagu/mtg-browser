@@ -24,6 +24,7 @@ Possible `make` targets are:
   - "`make core`" - *Only run the main programm*
   - "`make clean`" - *Clean the `./collection` folder*
   - "`make distclean`" - *Clean the `./collection` folder and reset everything done by `make update`*
+  - "`make www`" - *Runs update, clean, core and copies website related files into the `www/` folder*
 
 ## Preview
 
