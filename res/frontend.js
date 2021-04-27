@@ -264,14 +264,28 @@ const decks = {
 
       const cmc = [0, 0, 0, 0, 0, 0, 0, 0, 0]
 
-      /* create deck card entries */
+      const decklist = {}
       for (const [id, place] of Object.entries(deck)) {
+        const index = collection[0][id].name
+
+        if (!decklist[index]) {
+          decklist[index] = { count: 1, id: id }
+        } else {
+          decklist[index].count++
+        }
+      }
+
+      /* create deck card entries */
+      for (const [name, data] of Object.entries(decklist)) {
+        const id = data.id
+        const count = data.count
+
         const card = document.createElement('div')
         card.className = 'deck-card'
 
         const label = document.createElement('span')
         label.classList = 'deck-card-label'
-        label.innerHTML = collection[0][id].name_loc ? collection[0][id].name_loc : collection[0][id].name
+        label.innerHTML = `(${count}) ` + (collection[0][id].name_loc ? collection[0][id].name_loc : collection[0][id].name)
         card.appendChild(label)
 
         const mana = document.createElement('span')
@@ -281,10 +295,10 @@ const decks = {
 
         /* add cmc calc */
         if (collection[0][id].cmc < 1 && collection[0][id].types.toLowerCase().includes('land')) {
-          cmc['99'] = cmc['99'] ? cmc['99'] + 1 : 1
+          cmc['99'] = cmc['99'] ? cmc['99'] + (1 * count) : 1
         } else {
           const cost = collection[0][id].cmc
-          cmc[cost] = cmc[cost] ? cmc[cost] + 1 : 1
+          cmc[cost] = cmc[cost] ? cmc[cost] + (1 * count) : 1
         }
 
         frame.appendChild(card)
