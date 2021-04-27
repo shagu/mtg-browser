@@ -183,12 +183,12 @@ const convert = {
     let last
     let multi = false
     let artifact = false
-    let matches = str.match(/{[A-Za-z]}/g)
+    const matches = str.match(/{[A-Za-z]}/g)
 
     if (matches) {
       matches.forEach((match) => {
-        if(!last){ last = match }
-        if(last !== match) {
+        if (!last) { last = match }
+        if (last !== match) {
           multi = true
         }
       })
@@ -197,16 +197,16 @@ const convert = {
     }
 
     if (multi) {
-      return "#a07d10"
+      return '#a07d10'
     } else if (artifact) {
-      return "#969ea1"
+      return '#969ea1'
     } else {
-      switch(str.match(/{[A-Za-z]}/g)[0]) {
-        case '{B}': return "#55524a"
-        case '{U}': return "#0780c4"
-        case '{G}': return "#017d49"
-        case '{R}': return "#f6452a"
-        case '{W}': return "#eae8e4"
+      switch (str.match(/{[A-Za-z]}/g)[0]) {
+        case '{B}': return '#55524a'
+        case '{U}': return '#0780c4'
+        case '{G}': return '#017d49'
+        case '{R}': return '#f6452a'
+        case '{W}': return '#eae8e4'
       }
     }
   }
@@ -287,14 +287,14 @@ const decks = {
 
       let dcount = 0
       frame.ondragenter = function (ev) {
-        dcount ++
+        dcount++
         frame.classList.add('deck-drag')
       }
 
       frame.ondragleave = function (ev) {
         dcount--
 
-        if(dcount <= 0) {
+        if (dcount <= 0) {
           frame.classList.remove('deck-drag')
         }
       }
@@ -330,9 +330,9 @@ const decks = {
 
         const remove = document.createElement('span')
         remove.classList = 'deck-card-remove'
-        remove.innerHTML = "x"
-        remove.onclick = function() {
-          delete(deck[id])
+        remove.innerHTML = 'x'
+        remove.onclick = function () {
+          delete (deck[id])
           decks.reload()
         }
 
