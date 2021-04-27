@@ -178,6 +178,37 @@ const convert = {
     })
 
     return str
+  },
+  manaStringHex: function (str) {
+    let last
+    let multi = false
+    let artifact = false
+    let matches = str.match(/{[A-Za-z]}/g)
+
+    if (matches) {
+      matches.forEach((match) => {
+        if(!last){ last = match }
+        if(last !== match) {
+          multi = true
+        }
+      })
+    } else {
+      artifact = true
+    }
+
+    if (multi) {
+      return "#a07d10"
+    } else if (artifact) {
+      return "#969ea1"
+    } else {
+      switch(str.match(/{[A-Za-z]}/g)[0]) {
+        case '{B}': return "#55524a"
+        case '{U}': return "#0780c4"
+        case '{G}': return "#017d49"
+        case '{R}': return "#f6452a"
+        case '{W}': return "#eae8e4"
+      }
+    }
   }
 }
 
@@ -294,13 +325,13 @@ const decks = {
         const count = data.count
 
         const card = document.createElement('div')
+        card.style.backgroundColor = convert.manaStringHex(collection[0][id].mana)
         card.className = 'deck-card'
 
         const remove = document.createElement('span')
         remove.classList = 'deck-card-remove'
         remove.innerHTML = "x"
         remove.onclick = function() {
-          console.log("DELETE" + id)
           delete(deck[id])
           decks.reload()
         }

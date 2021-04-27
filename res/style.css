@@ -253,6 +253,7 @@ span.button:hover {
   font-weight: bold;
   text-align: center;
   margin: 0px 5px;
+  text-shadow: 0 0 3px black,0 0 3px black,0 0 3px black;
 }
 
 #deckbuilder span.deck-card-remove {
@@ -263,13 +264,21 @@ span.button:hover {
   font-weight: bold;
   text-align: center;
   color: #555;
-  border: 1px #333 solid;
+  text-shadow: 0px 0px 2px black;
   margin: 0px;
 }
 
 #deckbuilder span.deck-card-label {
   display: inline-block;
   color: #fff;
+  text-shadow: 0 0 3px black,0 0 3px black,0 0 3px black;
+  font-size: 12pt;
+  font-weight: bold;
+}
+
+#deckbuilder span.deck-card-label:hover {
+  text-decoration: underline;
+  cursor: pointer;
 }
 
 #deckbuilder span.deck-card-mana {
