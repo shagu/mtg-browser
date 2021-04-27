@@ -332,6 +332,8 @@ const decks = {
       /* add deck to pane */
       deckview.appendChild(frame)
     }
+
+    view.repaint()
   }
 }
 
@@ -344,11 +346,19 @@ const view = {
     /* get a sorted index array for collection */
     const index = sort.getSortIndex(collection)
 
+    /* write all deck associated cards into array */
+    const decklist = []
+    for (const name in decks.data) {
+      for (const card in decks.data[name]) {
+        decklist[card] = true
+      }
+    }
+
     /* apply filters and draw */
     let count = 0
     for (let i = 0; i < index.length; i++) {
       const object = collection[0][index[i].key]
-      if (filter.hasText(object) && filter.hasColor(object) && filter.hasType(object)) {
+      if (!decklist[index[i].key] && filter.hasText(object) && filter.hasColor(object) && filter.hasType(object)) {
         view.appendChild(collection[0][index[i].key].frame)
         count++
       }
