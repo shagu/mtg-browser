@@ -77,6 +77,7 @@ cards.forEach((card) => {
   card.name = jsondata.name
   card.color = jsondata.colorIdentity
   card.text = jsondata.text
+  card.mana = jsondata.manaCost
 
   /* add set data */
   const setdata = set2setname.get(card.set)
