@@ -5,325 +5,55 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Personal Magic Card Collection" />
+  <link rel="stylesheet" href="res/style.css">
   <title>MTG Card Collection</title>
 </head>
 
-<style>
-body {
-  background: #222;
-  font-family: Arial, sans-serif;
-  font-size: 12pt;
-  margin: 0px;
-  padding-top: 80px;
-  padding-bottom: 40px;
-}
-
-/* card overview */
-#viewport {
-  text-align: center;
-  margin: 10px;
-  width: calc(100% - 60px);
-}
-
-/* deck builder */
-#deckbuilder {
-  position: fixed;
-  top: 0;
-  right: -50px;
-  height: 100%;
-
-  border: 1px #333 solid;
-  width: 60px;
-  background: #111;
-  transition: width .5s;
-}
-
-#deckbuilder-toggle {
-  z-index: -2;
-  display: block;
-  position: relative;
-  margin: 40px 0;
-
-  cursor: pointer;
-
-  font-size: 10pt;
-  font-weight: bold;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  background: #111;
-  color: #fff;
-  padding: 5px 10px;
-  margin: 0 0 10px 0;
-  line-height: 24px;
-  width: 80px;
-  text-align: center;
-
-  position: absolute;
-  top: 50%;
-  left: 0;
-
-  /* Rotate from top left corner (not default) */
-  transform-origin:left bottom;
-  transform: rotate(-90deg);
-
-  border-top: 1px #333 solid;
-  border-left: 1px #333 solid;
-  border-right: 1px #333 solid;
-  border-bottom: 1px #111 solid;
-}
-
-#deckbuilder-toggle:hover {
-  color: #3fc;
-}
-
-div.card {
-  display: inline-block;
-  border: 1px #333 solid;
-  background: #000;
-  margin: 2px;
-  padding: 5px;
-}
-
-div.card:hover {
-  border: 1px #aaa solid;
-  /*transform: scale(1.2);*/
-}
-
-div.card:hover div.card-title {
-  color: #fff;
-}
-
-div.card-image {
-  width: 126px;
-  height: 176px;
-  background-size: 131px 183px;
-  background-position: center
-}
-
-div.card-title {
-  margin-top: 5px;
-  color: #ccc;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
-  width: 126px;
-  font-size: 10pt;
-  font-weight: 100;
-}
-
-/* navigation bar */
-#navbar {
-  color: #fff;
-  position: fixed;
-  width: 100%;
-  top: 0px;
-  background-image: linear-gradient(to bottom, rgba(0,0,0,1), rgba(0,0,0,.7));
-  border-bottom: 1px #333 solid;
-  box-shadow: 0px 0px 10px #000;
-  z-index: 1;
-}
-
-div.barsection {
-  display: inline-block;
-  font-weight: bold;
-  color: #aaa;
-  padding: 10px;
-  font-size: 10pt;
-}
-
-div.barsection img {
-  margin: 5px 5px 0px 0px;
-  border: 2px #444 solid;
-  border-radius: 50%;
-  padding: 1px;
-  height: 24px;
-}
-
-div.barsection img:hover {
-  border: 2px #aaa solid;
-}
-
-div.barsection input {
-  display: inline-block;
-  border: 1px #444 solid;
-  color: #ccc;
-  padding: 8px 12px;
-  background: rgba(25,25,25,.9);
-  cursor: pointer;
-  margin-top: 5px;
-  width: calc(100% - 20px);
-}
-
-div.barsection span.button {
-  display: inline-block;
-  border: 1px #444 solid;
-  color: #ccc;
-  padding: 8px 12px;
-  background: rgba(25,25,25,.9);
-  cursor: pointer;
-  margin-top: 5px;
-  font-size: 10pt;
-}
-
-div.barsection span.filter {
-  display: none;
-}
-
-div.barsection span.button:hover {
-  color: #fff;
-  border: 1px #666 solid;
-}
-
-div.barsection span.selected {
-  background: rgba(50,50,50,.9);
-  border: 1px #3fc solid !important;
-}
-
-div.barsection img.selected {
-  border: 2px #3fc solid;
-}
-
-/* preview window */
-#preview {
-  z-index: 5;
-  visibility: hidden;
-  background: rgba(0,0,0,.5);
-  width: 100%;
-  height: 100%;
-  position: fixed;
-  top: 0;
-}
-
-#preview-image {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  -webkit-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
-
-  border: 1px #444 solid;
-  padding: 5px;
-  background: #000;
-
-  height: 50%;
-}
-
-/* result count display */
-#results {
-  z-index: 1;
-  position: fixed;
-  width: 100%;
-  bottom: 0;
-
-  padding: 10px;
-  border-top: 1px #444 solid;
-  background-image: linear-gradient(to bottom, rgba(0,0,0,.7), rgba(0,0,0,1));
-  color: #fff;
-  font-size: 12pt;
-  text-align: center;
-  box-shadow: 0px 0px 10px #000;
-  font-size: 10pt;
-}
-
-#results span {
-  color: #3fc;
-  font-weight: bold;
-}
-
-#search { width: calc(100% - 1560px); }
-
-/* mobile view */
-@media screen and (max-width: 1760px) {
-  /* update page padding for double panel */
-  body { padding-top: 150px; }
-
-  /* realign elements */
-  #search { width: calc(100% - 500px); }
-  #colors { float: right !important; }
-  #sort { float: right !important; }
-
-  /* make advanced visible and hide button*/
-  #types { display: inline-block; }
-  #sort { display: inline-block; }
-}
-
-@media screen and (max-width: 1090px) {
-  /* revert page padding for single panel */
-  body { padding-top: 80px; }
-
-  /* show filter button and hide elements */
-  #filter { display: inline-block; }
-  #types { display: none; }
-  #sort { display: none; }
-
-  /* update frame positions */
-  #search input { width: calc(100% - 140px); }
-  #sort { float: left !important; }
-}
-
-@media screen and (max-width: 800px) {
-  /* update page padding for double panel */
-  body { padding-top: 150px; }
-
-  #deckbuilder { visibility: hidden; display: none; }
-  #viewport { width: 100%; }
-
-  /* convert to full width search */
-  #search { width: 100%; float: left !important; }
-  #search input { width: calc(100% - 160px); }
-}
-
-@media screen and (max-width: 460px) {
-  div.barsection { padding: 5px 10px; font-size: 8pt;}
-  #navbar img { height: 18px; margin: 5px 1px; }
-  #logo { height: 45px !important; }
-}
-</style>
 <body>
 <div id="navbar">
   <img id="logo" style="margin: 5px; float: left;" height="60" src="res/logo.png"/>
 
   <div class="barsection" style="float: left;" id="colors">
     Colors:<br/>
-    <img class="filter" id="filter-w" onclick='setColor("w")' src="res/white.png"/>
-    <img class="filter" id="filter-u" onclick='setColor("u")' src="res/blue.png"/>
-    <img class="filter" id="filter-r" onclick='setColor("r")' src="res/red.png"/>
-    <img class="filter" id="filter-b" onclick='setColor("b")' src="res/black.png"/>
-    <img class="filter" id="filter-g" onclick='setColor("g")' src="res/green.png"/>
-    <img class="filter" id="filter-a" onclick='setColor("a")' src="res/artifact.png"/>
-    <img class="filter" id="filter-m" onclick='setColor("m")' src="res/multi.png"/>
+    <img class="filter" id="filter-w" onclick='filter.setColor("w")' src="res/white.png"/>
+    <img class="filter" id="filter-u" onclick='filter.setColor("u")' src="res/blue.png"/>
+    <img class="filter" id="filter-r" onclick='filter.setColor("r")' src="res/red.png"/>
+    <img class="filter" id="filter-b" onclick='filter.setColor("b")' src="res/black.png"/>
+    <img class="filter" id="filter-g" onclick='filter.setColor("g")' src="res/green.png"/>
+    <img class="filter" id="filter-a" onclick='filter.setColor("a")' src="res/artifact.png"/>
+    <img class="filter" id="filter-m" onclick='filter.setColor("m")' src="res/multi.png"/>
   </div>
 
    <div class="barsection" style="float: left;" id="search">
     Search:<br/>
-    <input id="search-text" type="text" onchange="setText()"/>
+    <input id="search-text" type="text" onchange="filter.setText()"/>
 
-    <span class="types button filter" id="filter" onclick='toggleFilter(this)'>Advanced ▼</span>
+    <span class="types button filter" id="filter" onclick='filter.toggle(this)'>Advanced ▼</span>
   </div>
 
   <div class="barsection" id="types" style="float: left">
     Card-Type:<br/>
-    <span class="types button selected" id="types-instant" onclick='setType("instant")'>Instant</span>
-    <span class="types button selected" id="types-creature" onclick='setType("creature")'>Creature</span>
-    <span class="types button selected" id="types-sorcery" onclick='setType("sorcery")'>Sorcery</span>
-    <span class="types button selected" id="types-artifact" onclick='setType("artifact")'>Artifact</span>
-    <span class="types button selected" id="types-enchantment" onclick='setType("enchantment")'>Enchantment</span>
-    <span class="types button selected" id="types-planeswalker" onclick='setType("planeswalker")'>Planeswalker</span>
-    <span class="types button" id="types-land" onclick='setType("land")'>Land</span>
+    <span class="types button selected" id="types-instant" onclick='filter.setType("instant")'>Instant</span>
+    <span class="types button selected" id="types-creature" onclick='filter.setType("creature")'>Creature</span>
+    <span class="types button selected" id="types-sorcery" onclick='filter.setType("sorcery")'>Sorcery</span>
+    <span class="types button selected" id="types-artifact" onclick='filter.setType("artifact")'>Artifact</span>
+    <span class="types button selected" id="types-enchantment" onclick='filter.setType("enchantment")'>Enchantment</span>
+    <span class="types button selected" id="types-planeswalker" onclick='filter.setType("planeswalker")'>Planeswalker</span>
+    <span class="types button" id="types-land" onclick='filter.setType("land")'>Land</span>
   </div>
 
   <div class="barsection" id="sort" style="float: right">
     Sort By:<br/>
-    <span class="sort asc button selected" id="sort-name" onclick='setSort("name")'>Name<span id="sort-name-arrow">▼</span></span>
-    <span class="sort asc button" id="sort-color" onclick='setSort("color")'>Color<span id="sort-color-arrow">▼</span></span>
-    <span class="sort asc button" id="sort-cmc" onclick='setSort("cmc")'>Mana<span id="sort-cmc-arrow">▼</span></span>
-    <span class="sort asc button" id="sort-rarity" onclick='setSort("rarity")'>Rarity<span id="sort-rarity-arrow">▼</span></span>
-    <span class="sort asc button" id="sort-set" onclick='setSort("set")'>Set<span id="sort-set-arrow">▼</span></span>
-    <span class="sort asc button" id="sort-date" onclick='setSort("date")'>Date<span id="sort-date-arrow">▼</span></span>
+    <span class="sort desc button selected" id="sort-name" onclick='sort.setMode("name")'>Name<span id="sort-name-arrow">▲</span></span>
+    <span class="sort desc button" id="sort-color" onclick='sort.setMode("color")'>Color<span id="sort-color-arrow">▲</span></span>
+    <span class="sort desc button" id="sort-cmc" onclick='sort.setMode("cmc")'>Mana<span id="sort-cmc-arrow">▲</span></span>
+    <span class="sort desc button" id="sort-rarity" onclick='sort.setMode("rarity")'>Rarity<span id="sort-rarity-arrow">▲</span></span>
+    <span class="sort desc button" id="sort-set" onclick='sort.setMode("set")'>Set<span id="sort-set-arrow">▲</span></span>
+    <span class="sort desc button" id="sort-date" onclick='sort.setMode("date")'>Date<span id="sort-date-arrow">▲</span></span>
   </div>
 </div>
 
-<div id=preview onclick='previewHide()'>
+<div id=preview onclick='preview.hide()'>
   <img id="preview-image" src=""/>
 </div>
 
@@ -337,285 +67,21 @@ div.barsection img.selected {
 </div>
 
 <div id=deckbuilder>
-  <span id=deckbuilder-toggle onclick="toggleDeckbuilder()">▲ Decks</span>
+  <span id=deckbuilder-toggle onclick="decks.toggle()">▲ Decks</span>
 
   <!-- deck goes here !-->
+  <span class='toolbar'>
+    <span class="button">New</span>
+    <span class="button">Import</span>
+    <span class="button">Export</span>
+  </span>
+  <span id='decks'>
+    <!-- /* deck overview goes here */ -->
+  </span>
 </div>
 
 <script src="./collection/collection.js"></script>
-<script>
-  /* set filter defaults */
-  let sortby = "name"
-  let sortasc = true
-  let filtertext = ""
-  let filtercolor = ""
-  let filtertype = "instantcreaturesorceryartifactenchantmentplaneswalker"
+<script src="./res/frontend.js"></script>
 
-  window.onresize = function(self) {
-    let filter = document.getElementById('filter')
-    let types = document.getElementById('types')
-    let sort = document.getElementById('sort')
-
-    /* ensure visibility of advanced filters in full mode */
-    if (window.innerWidth >= 1090) {
-      types.style.display = "inline-block"
-      sort.style.display = "inline-block"
-      filter.classList.add("selected")
-    }
-
-    /* update filter button state */
-    if (types.style.display == "inline-block") {
-      filter.classList.add("selected")
-    } else {
-      filter.classList.remove("selected")
-    }
-  }
-
-  function toggleFilter(self) {
-    let types = document.getElementById('types')
-    let sort = document.getElementById('sort')
-
-    self.classList.remove("selected")
-
-    if (types.style.display == "inline-block") {
-      types.style.display = "none"
-      sort.style.display = "none"
-    } else {
-      types.style.display = "inline-block"
-      sort.style.display = "inline-block"
-      self.classList.add("selected")
-    }
-  }
-
-  function previewHide() {
-    let preview = document.getElementById('preview')
-    preview.style.visibility = "hidden"
-  }
-
-  function previewShow(self, id) {
-   let preview = document.getElementById('preview')
-   let image = document.getElementById('preview-image')
-   image.src = self.url
-   preview.style.visibility = "visible"
-  }
-
-  function filterColor(object) {
-    if (!filtercolor) { return true }
-    if (filtercolor.includes("a") && !object.color) { return true }
-    if (!object.color) { return false }
-    if (object.color.includes(",") && filtercolor.includes("m")) { return true }
-    for (color of object.color.toLowerCase().split(",")) {
-      if (!filtercolor.toLowerCase().includes(color)) { return false }
-    }
-    return true
-  }
-
-  function filterText(object) {
-    if (!filtertext) { return true }
-    if (object.name && object.name.toLowerCase().includes(filtertext.toLowerCase())) { return true }
-    if (object.name_lang && object.name_lang.toLowerCase().includes(filtertext.toLowerCase())) { return true }
-    return false
-  }
-
-  function filterType(object) {
-    if (!filtertype) { return true }
-    if (filtertype.includes("a") && !object.types) { return true }
-    if (!object.types) { return false }
-
-    for (type of object.types.toLowerCase().split(",")) {
-      if (filtertype.toLowerCase().includes(type)) { return true }
-    }
-    return false
-  }
-
-  function toggleDeckbuilder() {
-    let deckbuilder = document.getElementById('deckbuilder')
-    let button = document.getElementById('deckbuilder-toggle')
-    let viewport = document.getElementById('viewport')
-
-    if(deckbuilder.style.width == '60px' || !deckbuilder.style.width) {
-      deckbuilder.style.width = '500px'
-      viewport.style.width = 'calc(100% - 500px)'
-      button.innerHTML = "▼ Decks"
-    } else {
-      deckbuilder.style.width = '60px'
-      viewport.style.width = 'calc(100% - 60px)'
-      button.innerHTML = "▲ Decks"
-    }
-  }
-
-  function setSort(sort) {
-    sortby = sort
-
-    /* switch asc/desc on 2nd click */
-    let button = document.getElementById('sort-'+sortby)
-    let arrow = document.getElementById('sort-'+sortby+"-arrow")
-    if (button.classList.contains("selected")) {
-      if (button.classList.contains("asc")) {
-        arrow.innerHTML = "▲"
-        button.classList.remove("asc")
-        button.classList.add("desc")
-        sortasc = false
-      } else {
-        arrow.innerHTML = "▼"
-        button.classList.remove("desc")
-        button.classList.add("asc")
-        sortasc = true
-      }
-    }
-
-    /* make selected sort method visible */
-    var buttons = document.getElementsByClassName("sort");
-    for (var i = 0; i < buttons.length; i++) {
-      buttons.item(i).classList.remove("selected")
-    }
-    button.classList.add("selected")
-
-    repaint()
-  }
-
-  function setColor(color) {
-    if (!color) { return }
-    let button = document.getElementById('filter-'+color)
-    if (filtercolor.includes(color)) {
-      filtercolor = filtercolor.replace(color,'')
-      button.classList.remove("selected")
-    } else {
-      filtercolor = filtercolor + color
-      button.classList.add("selected")
-    }
-
-    repaint()
-  }
-
-  function setText() {
-    filtertext = document.getElementById('search-text').value
-    repaint()
-  }
-
-  function setType(type) {
-    if (!type) { return }
-    let button = document.getElementById('types-'+type)
-    if (filtertype.includes(type)) {
-      filtertype = filtertype.replace(type,'')
-      button.classList.remove("selected")
-    } else {
-      filtertype = filtertype + type
-      button.classList.add("selected")
-    }
-
-    repaint()
-  }
-
-  var rarities = []
-  rarities["unknown"] = 0
-  rarities["common"] = 2
-  rarities["uncommon"] = 4
-  rarities["rare"] = 8
-  rarities["mythic"] = 16
-
-  function repaint() {
-    /* build the search index */
-    var index = []
-    for (var x in collection[0]) {
-      let tmp = collection[0][x][sortby] ? collection[0][x][sortby] : "Z"
-
-      /* use proper order for rarities */
-      if (sortby == "rarity") {
-        tmp = collection[0][x][sortby] ? collection[0][x][sortby] : "unknown"
-        tmp = rarities[tmp]
-      }
-
-      index.push({ 'key': x, 'cmp': tmp })
-    }
-
-    if (sortasc) {
-      index.sort(function (a, b) {
-        var as = a['cmp'], bs = b['cmp'];
-        return as == bs ? 0 : (as > bs ? 1 : -1);
-      })
-    } else {
-      index.sort(function (a, b) {
-        var as = a['cmp'], bs = b['cmp'];
-        return as == bs ? 0 : (as < bs ? 1 : -1);
-      })
-    }
-
-    /* refresh view */
-    let view = document.getElementById('viewport')
-    view.innerHTML = ""
-
-    /* apply filters and draw */
-    let count = 0
-    for (var i = 0; i < index.length; i++) {
-      let object = collection[0][index[i]['key']]
-      if (filterText(object) && filterColor(object) && filterType(object)) {
-        view.appendChild(collection[0][index[i]['key']].frame)
-        count++
-      }
-    }
-
-    let results = document.getElementById('results')
-    results.innerHTML = "Found <span>" + count + "</span> cards."
-  }
-
-  function createCard(id, data) {
-    // card root frame
-    const frame = document.createElement('div')
-    frame.className = "card"
-
-    // card image
-    const image = document.createElement('div')
-    image.className = "card-image lazy"
-    image.setAttribute("data-src", "url(\"collection/" + id + ".jpg\")")
-    image.url = "collection/" + id + ".jpg"
-    image.onclick = function() { previewShow(image, id) }
-    frame.append(image)
-
-    // card title
-    title = document.createElement('div')
-    title.className = "card-title"
-    title.innerHTML = data.name
-    frame.append(title)
-
-    return frame
-  }
-
-  /* initialize viewport */
-  document.addEventListener("DOMContentLoaded", function() {
-    let view = document.getElementById('viewport')
-
-    for (var key in collection[0]) {
-      if (typeof collection[0][key].frame === 'undefined') {
-        collection[0][key].frame = createCard(key, collection[0][key])
-        collection[0][key].frame.parent = collection[0][key]
-      }
-      view.appendChild(collection[0][key].frame)
-    }
-
-    let lazyloadImages = document.querySelectorAll(".lazy")
-    let options = {
-      rootMargin: '1000px 0px',
-      threshold: 0.1
-    }
-
-    var imageObserver = new IntersectionObserver (function (entries, observer) {
-      entries.forEach(function(entry) {
-        if (entry.isIntersecting) {
-          var image = entry.target
-          image.style.backgroundImage = image.dataset.src
-          image.classList.remove("lazy")
-          imageObserver.unobserve(image)
-        }
-      })
-    }, options)
-
-    lazyloadImages.forEach(function(image) {
-      imageObserver.observe(image)
-    })
-
-    repaint()
-  })
-</script>
 </body>
 </html>
