@@ -164,6 +164,7 @@ const sort = {
 /* all kind of converter functions */
 const convert = {
   manaStringHTML: function (str) {
+    if (!str) { return str }
     // replace known mana symbols
     str = str.replaceAll('{B}', '<img src=res/black.png>')
     str = str.replaceAll('{U}', '<img src=res/blue.png>')
@@ -250,6 +251,7 @@ const decks = {
 
       let dragger = 0
       frame.ondragover = function (ev) {
+        if (!decks.drag || !collection[0][decks.drag]) { return }
         ev.preventDefault()
 
         frame.classList.add('deck-drag')
@@ -259,6 +261,8 @@ const decks = {
       frame.ondragleave = function (ev) {
         frame.classList.remove('deck-drag')
       }
+
+      const cmc = [0, 0, 0, 0, 0, 0, 0, 0, 0]
 
       /* create deck card entries */
       for (const [id, place] of Object.entries(deck)) {
@@ -275,9 +279,57 @@ const decks = {
         mana.innerHTML = convert.manaStringHTML(collection[0][id].mana)
         card.appendChild(mana)
 
-        frame.append(card)
+        /* add cmc calc */
+        if (collection[0][id].cmc < 1 && collection[0][id].types.toLowerCase().includes('land')) {
+          cmc['99'] = cmc['99'] ? cmc['99'] + 1 : 1
+        } else {
+          const cost = collection[0][id].cmc
+          cmc[cost] = cmc[cost] ? cmc[cost] + 1 : 1
+        }
+
+        frame.appendChild(card)
       }
 
+      /* add cost overview to deck */
+      const costarea = document.createElement('div')
+      costarea.classList = 'deck-costarea'
+
+      const costview = document.createElement('div')
+      costview.classList = 'deck-costview'
+
+      const costrow = document.createElement('div')
+      costrow.classList = 'deck-costrow'
+
+      cmc.forEach((id, i) => {
+        const count = cmc[i] ? cmc[i] : ''
+        const bar = document.createElement('span')
+        bar.classList = 'deck-costbar'
+        bar.innerHTML = count
+
+        const value = document.createElement('span')
+        value.classList = 'deck-costbarval'
+        value.style.height = count === '' || i === 99 ? '1px' : count * 5 + 'px'
+
+        bar.appendChild(value)
+        costrow.appendChild(bar)
+        costview.appendChild(costrow)
+      })
+
+      const namerow = document.createElement('div')
+      namerow.classList = 'deck-costrow'
+
+      cmc.forEach((id, i) => {
+        const name = document.createElement('span')
+        name.classList = 'deck-costlabel'
+        name.innerHTML = i === 99 ? 'L' : i
+        namerow.appendChild(name)
+        costview.appendChild(namerow)
+      })
+
+      costarea.appendChild(costview)
+      frame.appendChild(costarea)
+
+      /* add deck to pane */
       deckview.appendChild(frame)
     }
   }

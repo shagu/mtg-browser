@@ -280,6 +280,45 @@ span.button:hover {
   margin-right: 2px;
 }
 
+#deckbuilder div.deck-costarea {
+  text-align: center;
+  padding: 20px;
+}
+
+#deckbuilder div.deck-costview {
+  display: table;
+  margin: auto;
+  padding-right: 20px;
+}
+
+#deckbuilder div.deck-costrow {
+  display: table-row;
+}
+
+#deckbuilder span.deck-costlabel {
+  display: table-cell;
+  width: 25px;
+  color: #555;
+  text-align: center;
+  font-weight: bold;
+  font-size: 10pt;
+}
+
+#deckbuilder span.deck-costbar {
+  display: table-cell;
+  vertical-align: bottom;
+  text-align: center;
+  padding-bottom: 5px;
+}
+
+#deckbuilder span.deck-costbarval {
+  display: block;
+  background: #3fc;
+  width: 10px;
+  margin:auto;
+  vertical-align: bottom;
+}
+
 /* preview window */
 #preview {
   z-index: 5;
