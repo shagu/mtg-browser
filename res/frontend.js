@@ -217,7 +217,7 @@ const preview = {
   show: function (self, id) {
     const preview = document.getElementById('preview')
     const image = document.getElementById('preview-image')
-    image.src = self.url
+    image.src = 'collection/' + id + '.jpg'
     preview.style.visibility = 'visible'
   },
   hide: function (self, id) {
@@ -346,6 +346,7 @@ const decks = {
         const label = document.createElement('span')
         label.classList = 'deck-card-label'
         label.innerHTML = collection[0][id].name_loc ? collection[0][id].name_loc : collection[0][id].name
+        label.onclick = function () { preview.show(card, id) }
         card.appendChild(label)
 
         const mana = document.createElement('span')

@@ -233,16 +233,13 @@ span.button:hover {
 }
 
 #deckbuilder div.deck-card {
-  background: #222;
-  padding: 5px;
-  margin: 5px;
-  width: 100%;
+  padding: 10px;
+  margin: 5px 50px 5px 5px;
   clear: both;
 }
 
 #deckbuilder div.deck-card:hover > span.deck-card-remove {
   color: #f55;
-  border: 1px #a55 solid;
 }
 
 #deckbuilder span.deck-card-count {
@@ -286,7 +283,6 @@ span.button:hover {
   float: right;
   max-height: 20px;
   min-width: 20px;
-  margin-right: 75px;
 }
 
 #deckbuilder span.mana {
