@@ -334,7 +334,7 @@ const view = {
     // card title
     const title = document.createElement('div')
     title.className = 'card-title'
-    title.innerHTML = data.name
+    title.innerHTML = data.name_loc ? data.name_loc : data.name
     frame.append(title)
 
     return frame
