@@ -284,6 +284,11 @@ const decks = {
       }
 
       /* create deck card entries */
+      const decksizelabel = document.createElement('div')
+      decksizelabel.classList = 'deck-decksize'
+      decksizelabel.innerHTML = 'Cards in Total: <b>' + decksize + '</b>'
+      frame.appendChild(decksizelabel)
+
       for (const [name, data] of Object.entries(decklist)) {
         const id = data.id
         const count = data.count
@@ -291,9 +296,25 @@ const decks = {
         const card = document.createElement('div')
         card.className = 'deck-card'
 
+        const remove = document.createElement('span')
+        remove.classList = 'deck-card-remove'
+        remove.innerHTML = "x"
+        remove.onclick = function() {
+          console.log("DELETE" + id)
+          delete(deck[id])
+          decks.reload()
+        }
+
+        card.appendChild(remove)
+
+        const counter = document.createElement('span')
+        counter.classList = 'deck-card-count'
+        counter.innerHTML = count
+        card.appendChild(counter)
+
         const label = document.createElement('span')
         label.classList = 'deck-card-label'
-        label.innerHTML = `(${count}) ` + (collection[0][id].name_loc ? collection[0][id].name_loc : collection[0][id].name)
+        label.innerHTML = collection[0][id].name_loc ? collection[0][id].name_loc : collection[0][id].name
         card.appendChild(label)
 
         const mana = document.createElement('span')

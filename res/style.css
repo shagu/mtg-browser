@@ -214,10 +214,6 @@ span.button:hover {
   border-bottom: 1px #333 dashed;
 }
 
-#deckbuilder div.deck * {
-  pointer-events: none;
-}
-
 #deckbuilder div.deck-drag {
   background: #1a1a1a;
   color: #3fc;
@@ -231,6 +227,11 @@ span.button:hover {
   font-size: 24pt;
 }
 
+#deckbuilder div.deck-decksize {
+  font-size: 12pt;
+  margin: 0px 10px 10px 10px;
+}
+
 #deckbuilder div.deck-card {
   background: #222;
   padding: 5px;
@@ -239,17 +240,44 @@ span.button:hover {
   clear: both;
 }
 
+#deckbuilder div.deck-card:hover > span.deck-card-remove {
+  color: #f55;
+  border: 1px #a55 solid;
+}
+
+#deckbuilder span.deck-card-count {
+  display: inline-block;
+  height: 20px;
+  width: 20px;
+  color: #fff;
+  font-weight: bold;
+  text-align: center;
+  margin: 0px 5px;
+}
+
+#deckbuilder span.deck-card-remove {
+  cursor: pointer;
+  display: inline-block;
+  height: 20px;
+  width: 20px;
+  font-weight: bold;
+  text-align: center;
+  color: #555;
+  border: 1px #333 solid;
+  margin: 0px;
+}
+
 #deckbuilder span.deck-card-label {
   display: inline-block;
   color: #fff;
 }
 
 #deckbuilder span.deck-card-mana {
-  margin-right: 75px;
   display: inline-block;
   float: right;
   max-height: 20px;
   min-width: 20px;
+  margin-right: 75px;
 }
 
 #deckbuilder span.mana {
