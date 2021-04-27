@@ -161,6 +161,25 @@ const sort = {
   }
 }
 
+/* all kind of converter functions */
+const convert = {
+  manaStringHTML: function (str) {
+    // replace known mana symbols
+    str = str.replaceAll('{B}', '<img src=res/black.png>')
+    str = str.replaceAll('{U}', '<img src=res/blue.png>')
+    str = str.replaceAll('{G}', '<img src=res/green.png>')
+    str = str.replaceAll('{R}', '<img src=res/red.png>')
+    str = str.replaceAll('{W}', '<img src=res/white.png>')
+
+    // replace remaining occurrences
+    str = str.replaceAll(/{(.+)}/g, (str, value) => {
+      return '<span class="mana">' + value + '</span>'
+    })
+
+    return str
+  }
+}
+
 /* preview popup */
 const preview = {
   show: function (self, id) {
