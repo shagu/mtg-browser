@@ -140,6 +140,11 @@ const sort = {
         tmp = sort.raritymap[tmp]
       }
 
+      /* use localized titles where possible */
+      if (sort.mode === 'name') {
+        tmp = collection[0][x].name_loc ? collection[0][x].name_loc : collection[0][x].name
+      }
+
       index.push({ key: x, cmp: tmp })
     }
 
