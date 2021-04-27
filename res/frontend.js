@@ -249,24 +249,32 @@ const decks = {
         decks.reload()
       }
 
-      let dragger = 0
       frame.ondragover = function (ev) {
         if (!decks.drag || !collection[0][decks.drag]) { return }
         ev.preventDefault()
+      }
 
+      let dcount = 0
+      frame.ondragenter = function (ev) {
+        dcount ++
         frame.classList.add('deck-drag')
-        dragger = Date.now()
       }
 
       frame.ondragleave = function (ev) {
-        frame.classList.remove('deck-drag')
+        dcount--
+
+        if(dcount <= 0) {
+          frame.classList.remove('deck-drag')
+        }
       }
 
       const cmc = [0, 0, 0, 0, 0, 0, 0, 0, 0]
+      let decksize = 0
 
       const decklist = {}
       for (const [id, place] of Object.entries(deck)) {
         const index = collection[0][id].name
+        decksize = decksize + 1
 
         if (!decklist[index]) {
           decklist[index] = { count: 1, id: id }
