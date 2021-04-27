@@ -10,7 +10,7 @@ const filter = {
 
     self.classList.remove('selected')
 
-    if (types.style.display == 'inline-block') {
+    if (types.style.display === 'inline-block') {
       types.style.display = 'none'
       sort.style.display = 'none'
     } else {
@@ -58,7 +58,7 @@ const filter = {
     if (filter.activecolor.includes('a') && !object.color) { return true }
     if (!object.color) { return false }
     if (object.color.includes(',') && filter.activecolor.includes('m')) { return true }
-    for (color of object.color.toLowerCase().split(',')) {
+    for (const color of object.color.toLowerCase().split(',')) {
       if (!filter.activecolor.toLowerCase().includes(color)) { return false }
     }
     return true
@@ -76,7 +76,7 @@ const filter = {
     if (filter.activetype.includes('a') && !object.types) { return true }
     if (!object.types) { return false }
 
-    for (type of object.types.toLowerCase().split(',')) {
+    for (const type of object.types.toLowerCase().split(',')) {
       if (filter.activetype.toLowerCase().includes(type)) { return true }
     }
     return false
@@ -135,7 +135,7 @@ const sort = {
       let tmp = collection[0][x][sort.mode] ? collection[0][x][sort.mode] : 'Z'
 
       /* use proper order for rarities */
-      if (sort.mode == 'rarity') {
+      if (sort.mode === 'rarity') {
         tmp = collection[0][x][sort.mode] ? collection[0][x][sort.mode] : 'unknown'
         tmp = sort.raritymap[tmp]
       }
@@ -145,7 +145,7 @@ const sort = {
 
     index.sort(function (a, b) {
       const as = a.cmp; const bs = b.cmp
-      return as == bs ? 0 : (as > bs ? 1 : -1)
+      return as === bs ? 0 : (as > bs ? 1 : -1)
     })
 
     if (sort.reverse) {
@@ -183,7 +183,7 @@ const decks = {
     const button = document.getElementById('deckbuilder-toggle')
     const viewport = document.getElementById('viewport')
 
-    if (deckbuilder.style.width == '60px' || !deckbuilder.style.width) {
+    if (deckbuilder.style.width === '60px' || !deckbuilder.style.width) {
       deckbuilder.style.width = '500px'
       viewport.style.width = 'calc(100% - 500px)'
       button.innerHTML = '▼ Decks'
@@ -286,7 +286,7 @@ const view = {
     frame.append(image)
 
     // card title
-    title = document.createElement('div')
+    const title = document.createElement('div')
     title.className = 'card-title'
     title.innerHTML = data.name
     frame.append(title)
@@ -309,7 +309,7 @@ window.onresize = function (self) {
   }
 
   /* update filter button state */
-  if (types.style.display == 'inline-block') {
+  if (types.style.display === 'inline-block') {
     filter.classList.add('selected')
   } else {
     filter.classList.remove('selected')
@@ -334,7 +334,7 @@ document.addEventListener('DOMContentLoaded', function () {
     threshold: 0.1
   }
 
-  var imageObserver = new IntersectionObserver(function (entries, observer) {
+  const imageObserver = new IntersectionObserver(function (entries, observer) {
     entries.forEach(function (entry) {
       if (entry.isIntersecting) {
         const image = entry.target
