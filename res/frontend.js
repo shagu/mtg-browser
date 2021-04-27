@@ -197,9 +197,7 @@ const preview = {
 const decks = {
   drag: '',
   data: {
-    'Enter Deckname': {
-      '{G} Adventurous Impulse {Sorcery} (1)': 1
-    }
+    'New Deck': { }
   },
 
   toggle: function () {
