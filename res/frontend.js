@@ -188,14 +188,21 @@ const decks = {
     const button = document.getElementById('deckbuilder-toggle')
     const viewport = document.getElementById('viewport')
 
+    const content = document.getElementById('decks')
+    const toolbar = document.getElementById('decks-toolbar')
+
     if (deckbuilder.style.width === '60px' || !deckbuilder.style.width) {
       deckbuilder.style.width = '500px'
       viewport.style.width = 'calc(100% - 500px)'
       button.innerHTML = '▼ Decks'
+      content.style.display = 'block'
+      toolbar.style.display = 'block'
     } else {
       deckbuilder.style.width = '60px'
       viewport.style.width = 'calc(100% - 55px)'
       button.innerHTML = '▲ Decks'
+      content.style.display = 'none'
+      toolbar.style.display = 'none'
     }
 
     decks.reload()
@@ -220,23 +227,38 @@ const decks = {
       header.appendChild(caption)
 
       frame.ondrop = function (ev) {
-        console.log(decks.drag)
+        deck[decks.drag] = 1
+        decks.reload()
       }
 
+      let dragger = 0
       frame.ondragover = function (ev) {
         ev.preventDefault()
-        const deckbuilder = document.getElementById('deckbuilder')
-        const button = document.getElementById('deckbuilder-toggle')
+
+        frame.classList.add('deck-drag')
+        dragger = Date.now()
       }
 
       frame.ondragleave = function (ev) {
-        const deckbuilder = document.getElementById('deckbuilder')
-        const button = document.getElementById('deckbuilder-toggle')
+        frame.classList.remove('deck-drag')
       }
 
       /* create deck card entries */
       for (const [id, place] of Object.entries(deck)) {
+        const card = document.createElement('div')
+        card.className = 'deck-card'
 
+        const label = document.createElement('span')
+        label.classList = 'deck-card-label'
+        label.innerHTML = collection[0][id].name_loc ? collection[0][id].name_loc : collection[0][id].name
+        card.appendChild(label)
+
+        const mana = document.createElement('span')
+        mana.classList = 'deck-card-mana'
+        mana.innerHTML = convert.manaStringHTML(collection[0][id].mana)
+        card.appendChild(mana)
+
+        frame.append(card)
       }
 
       deckview.appendChild(frame)
