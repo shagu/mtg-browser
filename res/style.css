@@ -227,6 +227,17 @@ span.button:hover {
   font-size: 24pt;
 }
 
+#deckbuilder span.deck-rename {
+  cursor: pointer;
+  margin-left: 10px;
+  color: #555;
+  font-size: 18pt;
+}
+
+#deckbuilder span.deck-rename:hover {
+  color: #3fc;
+}
+
 #deckbuilder div.deck-decksize {
   font-size: 12pt;
   margin: 0px 10px 10px 10px;

@@ -302,6 +302,18 @@ const decks = {
       caption.innerHTML = name
       header.appendChild(caption)
 
+      const rename = document.createElement('span')
+      rename.className = 'deck-rename'
+      rename.innerHTML = '✎'
+      rename.onclick = function () {
+        const answer = prompt('Please enter a new deck name', name)
+        decks.data[answer] = decks.data[name]
+        delete decks.data[name]
+        decks.reload()
+      }
+
+      caption.appendChild(rename)
+
       frame.ondrop = function (ev) {
         deck[decks.drag] = 1
         decks.reload()
