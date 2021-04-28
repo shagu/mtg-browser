@@ -300,6 +300,17 @@ const decks = {
       caption.innerHTML = name
       header.appendChild(caption)
 
+      const deldeck = document.createElement('span')
+      deldeck.className = 'deck-delete'
+      deldeck.innerHTML = '🗑'
+      deldeck.onclick = function () {
+        if (confirm(`Are you sure you want to delete "${name}"?`)) {
+          delete decks.data[name]
+          decks.reload()
+        }
+      }
+      caption.appendChild(deldeck)
+
       const rename = document.createElement('span')
       rename.className = 'deck-rename'
       rename.innerHTML = '✎'
@@ -309,7 +320,6 @@ const decks = {
         delete decks.data[name]
         decks.reload()
       }
-
       caption.appendChild(rename)
 
       frame.ondrop = function (ev) {

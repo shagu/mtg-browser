@@ -228,6 +228,7 @@ span.button:hover {
 }
 
 #deckbuilder span.deck-rename {
+  float: right;
   cursor: pointer;
   margin-left: 10px;
   color: #555;
@@ -236,6 +237,19 @@ span.button:hover {
 
 #deckbuilder span.deck-rename:hover {
   color: #3fc;
+}
+
+#deckbuilder span.deck-delete {
+  float: right;
+  cursor: pointer;
+  margin-left: 10px;
+  color: #555;
+  font-size: 14pt;
+  margin-right: 50px;
+}
+
+#deckbuilder span.deck-delete:hover {
+  color: #f55;
 }
 
 #deckbuilder div.deck-decksize {
