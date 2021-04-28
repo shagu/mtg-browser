@@ -233,16 +233,25 @@ const decks = {
   },
 
   file: {
-    onChange: function(event) {
-      var reader = new FileReader()
+    onChange: function (event) {
+      const reader = new FileReader()
       reader.onload = decks.file.onReaderLoad
       reader.readAsText(event.target.files[0])
     },
 
-    onReaderLoad: function(event){
+    onReaderLoad: function (event) {
       console.log(event.target.result)
       decks.data = JSON.parse(event.target.result)
       decks.reload()
+    },
+
+    export: function () {
+      const downloadAnchorNode = document.createElement('a')
+      downloadAnchorNode.setAttribute('href', 'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(decks.data)))
+      downloadAnchorNode.setAttribute('download', 'mtgb-decks.json')
+      document.body.appendChild(downloadAnchorNode)
+      downloadAnchorNode.click()
+      downloadAnchorNode.remove()
     }
   },
 
