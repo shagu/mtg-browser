@@ -302,6 +302,7 @@ const decks = {
       const cmc = [0, 0, 0, 0, 0, 0, 0, 0, 0]
       let decksize = 0
 
+      const cmcindex = []
       const decklist = {}
       for (const [id, place] of Object.entries(deck)) {
         const index = collection[0][id].name
@@ -309,10 +310,15 @@ const decks = {
 
         if (!decklist[index]) {
           decklist[index] = { count: 1, id: id }
+          cmcindex.push({ key: index, cmp: collection[0][id].cmc })
         } else {
           decklist[index].count++
         }
       }
+
+      cmcindex.sort(function (a, b) {
+        return a.cmp === b.cmp ? 0 : ( a.cmp > b.cmp ? 1 : -1)
+      })
 
       /* create deck card entries */
       const decksizelabel = document.createElement('div')
@@ -320,7 +326,8 @@ const decks = {
       decksizelabel.innerHTML = 'Cards in Total: <b>' + decksize + '</b>'
       frame.appendChild(decksizelabel)
 
-      for (const [name, data] of Object.entries(decklist)) {
+      for (let i = 0; i < cmcindex.length; i++) {
+        const data = decklist[cmcindex[i].key]
         const id = data.id
         const count = data.count
 
