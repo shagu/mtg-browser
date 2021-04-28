@@ -296,7 +296,7 @@ const decks = {
   },
 
   reset: function () {
-    if (confirm(`Are you sure you want to remove all decks?`)) {
+    if (confirm('Are you sure you want to remove all decks?')) {
       decks.data = {}
       decks.reload()
     }
