@@ -128,20 +128,20 @@ const sort = {
     view.repaint()
   },
 
-  getSortIndex: function (collection) {
+  getSortIndex: function (collection, mode) {
     /* build the search index */
     const index = []
     for (const x in collection[0]) {
-      let tmp = collection[0][x][sort.mode] ? collection[0][x][sort.mode] : 'Z'
+      let tmp = collection[0][x][mode] ? collection[0][x][mode] : 'Z'
 
       /* use proper order for rarities */
-      if (sort.mode === 'rarity') {
-        tmp = collection[0][x][sort.mode] ? collection[0][x][sort.mode] : 'unknown'
+      if (mode === 'rarity') {
+        tmp = collection[0][x][mode] ? collection[0][x][mode] : 'unknown'
         tmp = sort.raritymap[tmp]
       }
 
       /* use localized titles where possible */
-      if (sort.mode === 'name') {
+      if (mode === 'name') {
         tmp = collection[0][x].name_loc ? collection[0][x].name_loc : collection[0][x].name
       }
 
@@ -419,7 +419,7 @@ const view = {
     view.innerHTML = ''
 
     /* get a sorted index array for collection */
-    const index = sort.getSortIndex(collection)
+    const index = sort.getSortIndex(collection, sort.mode)
 
     /* write all deck associated cards into array */
     const decklist = []
