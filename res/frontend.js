@@ -375,7 +375,12 @@ const decks = {
 
         const counter = document.createElement('span')
         counter.classList = 'deck-card-count'
-        counter.innerHTML = count
+        if (isLand || count <= 4) {
+          counter.innerHTML = count
+        } else {
+          counter.innerHTML = '<span style="color: #ff5555">' + count + '</span>'
+        }
+
         card.appendChild(counter)
 
         const label = document.createElement('span')
