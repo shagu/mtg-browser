@@ -232,9 +232,7 @@ const preview = {
 
 const decks = {
   drag: '',
-  data: {
-    'New Deck': { }
-  },
+  data: {},
 
   file: {
     onChange: function (event) {
@@ -460,6 +458,18 @@ const decks = {
       /* add deck to pane */
       deckview.appendChild(frame)
     }
+
+    const createnew = document.createElement('div')
+    createnew.classList = 'deck-new'
+    createnew.innerHTML = '<span>+</span>New Deck'
+    createnew.onclick = function () {
+      let i = 1
+      while (decks.data[`New Deck (${i})`]) { i++ }
+      decks.data[`New Deck (${i})`] = {}
+      decks.reload()
+    }
+
+    deckview.appendChild(createnew)
 
     view.repaint()
   }
