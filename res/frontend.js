@@ -385,11 +385,12 @@ const decks = {
         card.appendChild(mana)
 
         /* add cmc calc */
-        if (collection[0][id].cmc < 1 && collection[0][id].types.toLowerCase().includes('land')) {
-          cmc['99'] = cmc['99'] ? cmc['99'] + (1 * count) : 1
+        const cost = collection[0][id].cmc || 0
+        if (cost < 1 && collection[0][id].types.toLowerCase().includes('land')) {
+          cmc['99'] = cmc['99'] ? cmc['99'] + count : 1
         } else {
-          const cost = collection[0][id].cmc
-          cmc[cost] = cmc[cost] ? cmc[cost] + (1 * count) : 1
+          if (!cmc[cost]) { cmc[cost] = 0 }
+          cmc[cost] = cmc[cost] + count
         }
 
         frame.appendChild(card)
