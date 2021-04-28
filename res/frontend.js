@@ -233,6 +233,7 @@ const preview = {
 const decks = {
   drag: '',
   data: {},
+  folded: {},
 
   file: {
     onChange: function (event) {
@@ -282,6 +283,18 @@ const decks = {
     decks.reload()
   },
 
+  folding: function (frame, name) {
+    if (decks.folded[name]) {
+      frame.content.style.visibility = 'hidden'
+      frame.caption.style.fontSize = '16pt'
+      frame.style.height = '30px'
+    } else {
+      frame.content.style.visibility = 'visible'
+      frame.caption.style.fontSize = '24pt'
+      frame.style.height = ''
+    }
+  },
+
   reload: function () {
     const deckview = document.getElementById('decks')
     deckview.innerHTML = ''
@@ -293,12 +306,24 @@ const decks = {
 
       const header = document.createElement('div')
       header.className = 'deck-header'
+      header.onclick = function () {
+        /* toggle folding */
+        if (decks.folded[name]) {
+          delete decks.folded[name]
+        } else {
+          decks.folded[name] = true
+        }
+
+        /* update folding state */
+        decks.folding(frame, name)
+      }
       frame.appendChild(header)
 
       const caption = document.createElement('span')
       caption.className = 'deck-title'
       caption.innerHTML = name
       header.appendChild(caption)
+      frame.caption = caption
 
       const deldeck = document.createElement('span')
       deldeck.className = 'deck-delete'
@@ -348,6 +373,12 @@ const decks = {
         }
       }
 
+      /* main content frame to toggle */
+      const content = document.createElement('div')
+      content.className = 'deck-content'
+      frame.content = content
+      frame.appendChild(content)
+
       const cmc = [0, 0, 0, 0, 0, 0, 0, 0, 0]
       let decksize = 0
 
@@ -373,7 +404,7 @@ const decks = {
       const decksizelabel = document.createElement('div')
       decksizelabel.classList = 'deck-decksize'
       decksizelabel.innerHTML = 'Cards in Total: <b>' + decksize + '</b>'
-      frame.appendChild(decksizelabel)
+      content.appendChild(decksizelabel)
 
       for (let i = 0; i < cmcindex.length; i++) {
         const data = decklist[cmcindex[i].key]
@@ -425,7 +456,7 @@ const decks = {
           cmc[cost] = cmc[cost] + count
         }
 
-        frame.appendChild(card)
+        content.appendChild(card)
       }
 
       /* add cost overview to deck */
@@ -465,10 +496,13 @@ const decks = {
       })
 
       costarea.appendChild(costview)
-      frame.appendChild(costarea)
+      content.appendChild(costarea)
 
       /* add deck to pane */
       deckview.appendChild(frame)
+
+      /* update deck visibility */
+      decks.folding(frame, name)
     }
 
     const createnew = document.createElement('div')

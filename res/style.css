@@ -221,6 +221,11 @@ span.button:hover {
 
 #deckbuilder div.deck-header {
   padding: 5px;
+  cursor: pointer;
+}
+
+#deckbuilder div.deck-header:hover > span.deck-title {
+  color: #3fc;
 }
 
 #deckbuilder span.deck-title {
