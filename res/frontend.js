@@ -316,9 +316,11 @@ const decks = {
       rename.innerHTML = '✎'
       rename.onclick = function () {
         const answer = prompt('Please enter a new deck name', name)
-        decks.data[answer] = decks.data[name]
-        delete decks.data[name]
-        decks.reload()
+        if (answer && answer !== '' && !decks.data[answer]) {
+          decks.data[answer] = decks.data[name]
+          delete decks.data[name]
+          decks.reload()
+        }
       }
       caption.appendChild(rename)
 
