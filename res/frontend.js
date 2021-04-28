@@ -232,6 +232,20 @@ const decks = {
     'New Deck': { }
   },
 
+  file: {
+    onChange: function(event) {
+      var reader = new FileReader()
+      reader.onload = decks.file.onReaderLoad
+      reader.readAsText(event.target.files[0])
+    },
+
+    onReaderLoad: function(event){
+      console.log(event.target.result)
+      decks.data = JSON.parse(event.target.result)
+      decks.reload()
+    }
+  },
+
   toggle: function () {
     const deckbuilder = document.getElementById('deckbuilder')
     const button = document.getElementById('deckbuilder-toggle')
@@ -317,7 +331,7 @@ const decks = {
       }
 
       cmcindex.sort(function (a, b) {
-        return a.cmp === b.cmp ? 0 : ( a.cmp > b.cmp ? 1 : -1)
+        return a.cmp === b.cmp ? 0 : (a.cmp > b.cmp ? 1 : -1)
       })
 
       /* create deck card entries */
@@ -536,6 +550,9 @@ document.addEventListener('DOMContentLoaded', function () {
   lazyloadImages.forEach(function (image) {
     imageObserver.observe(image)
   })
+
+  /* add deck file upload events */
+  document.getElementById('deck-file').addEventListener('change', decks.file.onChange)
 
   view.repaint()
 })
