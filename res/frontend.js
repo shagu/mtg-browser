@@ -180,6 +180,10 @@ const convert = {
     return str
   },
   manaStringHex: function (str) {
+    if (!str) {
+      return '#876543' /* land */
+    }
+
     let last
     let multi = false
     let artifact = false
@@ -353,6 +357,7 @@ const decks = {
         const data = decklist[cmcindex[i].key]
         const id = data.id
         const count = data.count
+        const isLand = collection[0][id].types.toLowerCase().includes('land')
 
         const card = document.createElement('div')
         card.style.backgroundColor = convert.manaStringHex(collection[0][id].mana)
@@ -386,7 +391,7 @@ const decks = {
 
         /* add cmc calc */
         const cost = collection[0][id].cmc || 0
-        if (cost < 1 && collection[0][id].types.toLowerCase().includes('land')) {
+        if (cost < 1 && isLand) {
           cmc['99'] = cmc['99'] ? cmc['99'] + count : 1
         } else {
           if (!cmc[cost]) { cmc[cost] = 0 }
