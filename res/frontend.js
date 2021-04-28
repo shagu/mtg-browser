@@ -295,6 +295,13 @@ const decks = {
     }
   },
 
+  reset: function () {
+    if (confirm(`Are you sure you want to remove all decks?`)) {
+      decks.data = {}
+      decks.reload()
+    }
+  },
+
   reload: function () {
     const deckview = document.getElementById('decks')
     deckview.innerHTML = ''
