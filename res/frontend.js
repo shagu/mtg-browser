@@ -67,7 +67,7 @@ const filter = {
   hasText: function (object) {
     if (!filter.activetext) { return true }
     if (object.name && object.name.toLowerCase().includes(filter.activetext.toLowerCase())) { return true }
-    if (object.name_lang && object.name_lang.toLowerCase().includes(filter.activetext.toLowerCase())) { return true }
+    if (object.name_loc && object.name_loc.toLowerCase().includes(filter.activetext.toLowerCase())) { return true }
     return false
   },
 
