@@ -7,9 +7,10 @@ body {
   padding-bottom: 40px;
 }
 
-span.button {
+.button {
   display: inline-block;
   border: 1px #444 solid;
+  text-decoration: none;
   color: #ccc;
   padding: 8px 12px;
   background: rgba(25,25,25,.9);
@@ -18,7 +19,7 @@ span.button {
   font-size: 10pt;
 }
 
-span.button:hover {
+.button:hover {
   color: #fff;
   border: 1px #666 solid;
 }

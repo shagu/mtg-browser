@@ -249,12 +249,10 @@ const decks = {
     },
 
     export: function () {
-      const downloadAnchorNode = document.createElement('a')
-      downloadAnchorNode.setAttribute('href', 'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(decks.data)))
-      downloadAnchorNode.setAttribute('download', 'mtgb-decks.json')
-      document.body.appendChild(downloadAnchorNode)
-      downloadAnchorNode.click()
-      downloadAnchorNode.remove()
+      const button = document.getElementById('deck-export')
+      let content = 'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(decks.data))
+      button.setAttribute('href', content)
+      button.setAttribute('download', 'mtgb-decks.json')
     }
   },
 

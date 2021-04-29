@@ -73,9 +73,9 @@
   <span id='decks-toolbar'>
     <input id="deck-file" type="file" style="display: none;"/>
 
-    <span id="deck-reset" class="button" onclick="decks.reset()">Reset</span>
-    <span id="deck-import" class="button" onclick="document.getElementById('deck-file').click()">Import</span>
-    <span id="deck-export" class="button" onclick="decks.file.export()">Export</span>
+    <a id="deck-reset" class="button" onclick="decks.reset()">Reset</a>
+    <a id="deck-import" class="button" onclick="document.getElementById('deck-file').click()">Import</a>
+    <a href="data" id="deck-export" class="button" onclick="decks.file.export()">Export</a>
   </span>
   <span id='decks'>
     <!-- /* deck overview goes here */ -->
