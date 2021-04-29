@@ -68,6 +68,8 @@ const filter = {
     if (!filter.activetext) { return true }
     if (object.name && object.name.toLowerCase().includes(filter.activetext.toLowerCase())) { return true }
     if (object.name_loc && object.name_loc.toLowerCase().includes(filter.activetext.toLowerCase())) { return true }
+    if (object.text && object.text.toLowerCase().includes(filter.activetext.toLowerCase())) { return true }
+    if (object.text_loc && object.text_loc.toLowerCase().includes(filter.activetext.toLowerCase())) { return true }
     return false
   },
 
