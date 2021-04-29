@@ -187,6 +187,7 @@ const convert = {
     let last
     let multi = false
     let artifact = false
+    str = str.replaceAll('{X}', '{0}')
     const matches = str.match(/{[A-Za-z]}/g)
 
     if (matches) {
