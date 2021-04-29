@@ -455,7 +455,8 @@ const decks = {
         /* add cmc calc */
         const cost = collection[0][id].cmc || 0
         if (cost < 1 && isLand) {
-          cmc['99'] = cmc['99'] ? cmc['99'] + count : 1
+          if (!cmc['99']) { cmc['99'] = 0 }
+          cmc['99'] = cmc['99'] + count
         } else {
           if (!cmc[cost]) { cmc[cost] = 0 }
           cmc[cost] = cmc[cost] + count
