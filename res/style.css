@@ -222,6 +222,7 @@ span.button:hover {
 #deckbuilder div.deck-header {
   padding: 5px;
   cursor: pointer;
+  margin-right: 50px;
 }
 
 #deckbuilder div.deck-header:hover > span.deck-title {
@@ -250,7 +251,6 @@ span.button:hover {
   margin-left: 10px;
   color: #555;
   font-size: 14pt;
-  margin-right: 50px;
 }
 
 #deckbuilder span.deck-delete:hover {
