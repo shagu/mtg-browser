@@ -284,11 +284,11 @@ const decks = {
 
   folding: function (frame, name) {
     if (decks.folded[name]) {
-      frame.content.style.visibility = 'hidden'
+      frame.content.style.display = 'none'
       frame.caption.style.fontSize = '16pt'
       frame.style.height = '30px'
     } else {
-      frame.content.style.visibility = 'visible'
+      frame.content.style.display = 'block'
       frame.caption.style.fontSize = '24pt'
       frame.style.height = ''
     }

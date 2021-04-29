@@ -213,6 +213,7 @@ body {
 #deckbuilder div.deck {
   padding: 10px;
   border-bottom: 1px #333 dashed;
+  clear: both;
 }
 
 #deckbuilder div.deck-drag {
