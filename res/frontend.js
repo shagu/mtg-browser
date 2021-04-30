@@ -4,6 +4,18 @@ const filter = {
   activetext: '',
   activetype: 'instantcreaturesorceryartifactenchantmentplaneswalker',
 
+  apply: function (collection) {
+    const output = {}
+    for (const x in collection) {
+      const object = collection[x]
+      if (filter.hasText(object) && filter.hasColor(object) && filter.hasType(object)) {
+        output[x] = object
+      }
+    }
+
+    return output
+  },
+
   toggle: function (self) {
     const types = document.getElementById('types')
     const sort = document.getElementById('sort')
@@ -133,18 +145,18 @@ const sort = {
   getSortIndex: function (collection, mode) {
     /* build the search index */
     const index = []
-    for (const x in collection[0]) {
-      let tmp = collection[0][x][mode] ? collection[0][x][mode] : 'Z'
+    for (const x in collection) {
+      let tmp = collection[x][mode] ? collection[x][mode] : 'Z'
 
       /* use proper order for rarities */
       if (mode === 'rarity') {
-        tmp = collection[0][x][mode] ? collection[0][x][mode] : 'unknown'
+        tmp = collection[x][mode] ? collection[x][mode] : 'unknown'
         tmp = sort.raritymap[tmp]
       }
 
       /* use localized titles where possible */
       if (mode === 'name') {
-        tmp = collection[0][x].name_loc ? collection[0][x].name_loc : collection[0][x].name
+        tmp = collection[x].name_loc ? collection[x].name_loc : collection[x].name
       }
 
       index.push({ key: x, cmp: tmp })
@@ -248,7 +260,7 @@ const preview = {
     }
 
     /* find next/prev ids and set buttons */
-    const index = sort.getSortIndex(collection, sort.mode)
+    const index = sort.getSortIndex(filter.apply(collection[0]), sort.mode)
     for (let i = 0; i < index.length; i++) {
       if (index[i].key == id) {
         btnprev.onclick = function () { preview.show(false, index[i - 1].key) }
@@ -584,8 +596,11 @@ const view = {
     const view = document.getElementById('viewport')
     view.innerHTML = ''
 
-    /* get a sorted index array for collection */
-    const index = sort.getSortIndex(collection, sort.mode)
+    /* get filtered results */
+    const results = filter.apply(collection[0])
+
+    /* get a sorted index array for results */
+    const index = sort.getSortIndex(results, sort.mode)
 
     /* write all deck associated cards into array */
     const decklist = []
@@ -598,15 +613,15 @@ const view = {
     /* apply filters and draw */
     let count = 0
     for (let i = 0; i < index.length; i++) {
-      const object = collection[0][index[i].key]
-      if (!decklist[index[i].key] && filter.hasText(object) && filter.hasColor(object) && filter.hasType(object)) {
-        view.appendChild(collection[0][index[i].key].frame)
+      const object = results[index[i].key]
+      if (!decklist[index[i].key]) {
+        view.appendChild(results[index[i].key].frame)
         count++
       }
     }
 
-    const results = document.getElementById('results')
-    results.innerHTML = 'Found <span>' + count + '</span> cards.'
+    const resultcount = document.getElementById('results')
+    resultcount.innerHTML = 'Found <span>' + count + '</span> cards.'
   },
 
   createCard: function (id, data) {
