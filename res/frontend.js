@@ -180,25 +180,25 @@ const convert = {
   manaStringHTML: function (str) {
     if (!str) { return str }
     // replace known mana symbols
-    str = str.replaceAll('{B}', '<img src=res/black.png>')
-    str = str.replaceAll('{U}', '<img src=res/blue.png>')
-    str = str.replaceAll('{G}', '<img src=res/green.png>')
-    str = str.replaceAll('{R}', '<img src=res/red.png>')
-    str = str.replaceAll('{W}', '<img src=res/white.png>')
+    str = str.replaceAll('{B}', '<img class="mana" src=res/black.png>')
+    str = str.replaceAll('{U}', '<img class="mana" src=res/blue.png>')
+    str = str.replaceAll('{G}', '<img class="mana" src=res/green.png>')
+    str = str.replaceAll('{R}', '<img class="mana" src=res/red.png>')
+    str = str.replaceAll('{W}', '<img class="mana" src=res/white.png>')
 
-    str = str.replaceAll('{B/G}', '<img src=res/black-green.png>')
-    str = str.replaceAll('{B/R}', '<img src=res/black-red.png>')
-    str = str.replaceAll('{U/B}', '<img src=res/blue-black.png>')
-    str = str.replaceAll('{U/R}', '<img src=res/blue-red.png>')
-    str = str.replaceAll('{G/U}', '<img src=res/green-blue.png>')
-    str = str.replaceAll('{G/W}', '<img src=res/green-white.png>')
-    str = str.replaceAll('{R/G}', '<img src=res/red-green.png>')
-    str = str.replaceAll('{R/W}', '<img src=res/red-white.png>')
-    str = str.replaceAll('{W/B}', '<img src=res/white-black.png>')
-    str = str.replaceAll('{W/U}', '<img src=res/white-blue.png>')
+    str = str.replaceAll('{B/G}', '<img class="mana" src=res/black-green.png>')
+    str = str.replaceAll('{B/R}', '<img class="mana" src=res/black-red.png>')
+    str = str.replaceAll('{U/B}', '<img class="mana" src=res/blue-black.png>')
+    str = str.replaceAll('{U/R}', '<img class="mana" src=res/blue-red.png>')
+    str = str.replaceAll('{G/U}', '<img class="mana" src=res/green-blue.png>')
+    str = str.replaceAll('{G/W}', '<img class="mana" src=res/green-white.png>')
+    str = str.replaceAll('{R/G}', '<img class="mana" src=res/red-green.png>')
+    str = str.replaceAll('{R/W}', '<img class="mana" src=res/red-white.png>')
+    str = str.replaceAll('{W/B}', '<img class="mana" src=res/white-black.png>')
+    str = str.replaceAll('{W/U}', '<img class="mana" src=res/white-blue.png>')
 
-    str = str.replaceAll('{S}', '<img src=res/snow.png>')
-    str = str.replaceAll('{T}', '<img src=res/tap.png>')
+    str = str.replaceAll('{S}', '<img class="mana" src=res/snow.png>')
+    str = str.replaceAll('{T}', '<img class="mana" src=res/tap.png>')
 
     // replace remaining occurrences
     str = str.replaceAll(/{(.+)}/g, (str, value) => {
