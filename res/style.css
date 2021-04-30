@@ -498,6 +498,19 @@ img.mana {
   font-size: 12pt;
 }
 
+#preview-text span.mana {
+  width: 14px;
+  height: 14px;
+  padding: 1px;
+  font-size: 11pt;
+  margin-bottom: 8px;
+}
+
+#preview-text img.mana {
+  height: 16px;
+  width: 16px;
+}
+
 #preview-text span.lookup{
   padding: 10px;
   display: block;

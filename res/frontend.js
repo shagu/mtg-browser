@@ -345,7 +345,7 @@ const preview = {
       text.innerHTML = `
       <span class='title'>${card.name || ''}${card.name_loc ? '<br/><small>(' + card.name_loc + ')</small>' : ''}</span>
       <span class='types'>${card.types || ''}</span>
-      <span class='text'>${card.text || ''}</span>
+      <span class='text'>${convert.parse(card.text) || ''}</span>
       <span class='lookup'>Lookup:
       <ul>
         <li><a href='https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=${card.multiverse}'>gatherer.wizards</a></li>
