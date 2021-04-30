@@ -261,8 +261,8 @@ const preview = {
     const index = sort.getSortIndex(filter.apply(collection[0]), sort.mode)
     for (let i = 0; i < index.length; i++) {
       if (index[i].key == id) {
-        btnprev.onclick = function () { preview.show(false, index[i - 1].key) }
-        btnnext.onclick = function () { preview.show(false, index[i + 1].key) }
+        if (index[i - 1]) btnprev.onclick = function () { preview.show(false, index[i - 1].key) }
+        if (index[i + 1]) btnnext.onclick = function () { preview.show(false, index[i + 1].key) }
       }
     }
 
