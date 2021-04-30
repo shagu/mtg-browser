@@ -33,7 +33,7 @@ body {
   background-image: linear-gradient(to bottom, rgba(0,0,0,1), rgba(0,0,0,.7));
   border-bottom: 1px #333 solid;
   box-shadow: 0px 0px 10px #000;
-  z-index: 1;
+  z-index: 3;
 }
 
 #navbar #search { width: calc(100% - 1560px); }
@@ -84,7 +84,7 @@ body {
 
 /* result count display */
 #results {
-  z-index: 1;
+  z-index: 3;
   position: fixed;
   width: 100%;
   bottom: 0;
@@ -147,6 +147,7 @@ body {
 
 /* deck builder */
 #deckbuilder {
+  z-index: 2;
   position: fixed;
   top: 0;
   right: -50px;
@@ -416,7 +417,7 @@ body {
 
 /* preview window */
 #preview {
-  z-index: 5;
+  z-index: 1;
   visibility: hidden;
   background: rgba(0,0,0,.6);
   width: 100%;
