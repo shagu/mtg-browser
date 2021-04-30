@@ -24,6 +24,35 @@ body {
   border: 1px #666 solid;
 }
 
+span.mana {
+  color: #000;
+  background: #ccc;
+
+  display: inline-block;
+  text-align: center;
+  vertical-align: middle;
+  border-radius: 50%;
+
+  font-weight: bold;
+  font-size: 12pt;
+
+  width: 19px;
+  height: 18px;
+  padding-top: 2px;
+  padding-left: 1px;
+
+  margin-bottom: 12px;
+  margin-right: 2px;
+  filter: drop-shadow(0 0 1px black);
+}
+
+img.mana {
+  height: 20px;
+  width: 20px;
+  margin-right: 2px;
+  filter: drop-shadow(0 0 1px black);
+}
+
 /* navigation bar */
 #navbar {
   color: #fff;
@@ -320,36 +349,6 @@ body {
   max-height: 20px;
   text-align: right;
   white-space: nowrap;
-}
-
-#deckbuilder span.mana {
-  color: #000;
-  background: #ccc;
-
-  display: inline-block;
-  text-align: center;
-  vertical-align: middle;
-  border-radius: 50%;
-
-
-  font-weight: bold;
-  font-size: 12pt;
-
-  width: 19px;
-  height: 18px;
-  padding-top: 2px;
-  padding-left: 1px;
-
-  margin-bottom: 12px;
-  margin-right: 2px;
-  filter: drop-shadow(0 0 1px black);
-}
-
-#deckbuilder img {
-  height: 20px;
-  width: 20px;
-  margin-right: 2px;
-  filter: drop-shadow(0 0 1px black);
 }
 
 #deckbuilder div.deck-costarea {
