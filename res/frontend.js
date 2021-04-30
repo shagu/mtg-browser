@@ -363,6 +363,16 @@ const decks = {
     }
   },
 
+  contains: function (id) {
+    for (const name in decks.data) {
+      if (decks.data[name][id]) {
+        return true
+      }
+    }
+
+    return false
+  },
+
   toggle: function () {
     const deckbuilder = document.getElementById('deckbuilder')
     const button = document.getElementById('deckbuilder-toggle')
