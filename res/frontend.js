@@ -237,8 +237,6 @@ const preview = {
     const previewframe = document.getElementById('preview')
     const image = document.getElementById('preview-image')
     const text = document.getElementById('preview-text')
-    const filename = document.getElementById('preview-filename')
-
     const btnprev = document.getElementById('preview-prev')
     const btnnext = document.getElementById('preview-next')
 
