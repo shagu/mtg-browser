@@ -308,8 +308,40 @@ const preview = {
     const btnprev = document.getElementById('preview-prev')
     const btnnext = document.getElementById('preview-next')
 
+    window.onkeydown = function (event) {
+      if (event.keyCode === 27) {
+        event.preventDefault()
+        preview.hide()
+      } else if (event.keyCode === 37) {
+        event.preventDefault()
+        btnprev.click()
+      } else if (event.keyCode === 39) {
+        event.preventDefault()
+        btnnext.click()
+      }
+    }
+
+    image.setAttribute('draggable', true)
+    image.ondragstart = function () { decks.drag = id }
+    image.ondragend = function () {
+      decks.drag = ''
+
+      /* update to next card in collection */
+      if (decks.contains(id)) {
+        const neighbors = preview.neighbors('collection', id)
+        if (neighbors.next) {
+          preview.show(false, neighbors.next)
+        } else if (neighbors.prev) {
+          preview.show(false, neighbors.prev)
+        }
+      }
+    }
+
     const card = collection[0][id]
     if (card !== 'undefined') {
+      image.src = 'collection/' + id + '.jpg'
+      previewframe.style.visibility = 'visible'
+
       text.innerHTML = `
       <span class='title'>${card.name || ''}${card.name_loc ? '<br/><small>(' + card.name_loc + ')</small>' : ''}</span>
       <span class='types'>${card.types || ''}</span>
@@ -325,52 +357,10 @@ const preview = {
       `
     }
 
-    /* try to find next/prev ids in deck */
-    let prev, next, isDeck
-    for (const name in decks.data) {
-      for (const card in decks.data[name]) {
-        if (card == id) {
-          isDeck = true
-        } else if (isDeck) {
-          next = card
-          break
-        } else {
-          prev = card
-        }
-      }
-    }
-
     /* assign prev/next to either deck or collection */
-    if (isDeck) {
-      /* set deck prev/next values if existing */
-      preview.setbutton(btnprev, prev)
-      preview.setbutton(btnnext, next)
-    } else {
-      /* find next/prev ids in collection */
-      const index = sort.getSortIndex(filter.apply(collection[0]), sort.mode)
-      for (let i = 0; i < index.length; i++) {
-        if (index[i].key == id) {
-          preview.setbutton(btnprev, index[i - 1] ? index[i - 1].key : false)
-          preview.setbutton(btnnext, index[i + 1] ? index[i + 1].key : false)
-        }
-      }
-    }
-
-    image.src = 'collection/' + id + '.jpg'
-    previewframe.style.visibility = 'visible'
-
-    window.onkeydown = function (event) {
-      if (event.keyCode === 27) {
-        event.preventDefault()
-        preview.hide()
-      } else if (event.keyCode === 37) {
-        event.preventDefault()
-        btnprev.click()
-      } else if (event.keyCode === 39) {
-        event.preventDefault()
-        btnnext.click()
-      }
-    }
+    const neighbors = preview.neighbors(decks.contains(id) ? 'deck' : 'collection', id)
+    preview.setbutton(btnprev, neighbors.prev)
+    preview.setbutton(btnnext, neighbors.next)
   },
 
   hide: function (self, id) {
