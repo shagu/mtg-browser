@@ -257,12 +257,34 @@ const preview = {
       `
     }
 
-    /* find next/prev ids and set buttons */
-    const index = sort.getSortIndex(filter.apply(collection[0]), sort.mode)
-    for (let i = 0; i < index.length; i++) {
-      if (index[i].key == id) {
-        if (index[i - 1]) btnprev.onclick = function () { preview.show(false, index[i - 1].key) }
-        if (index[i + 1]) btnnext.onclick = function () { preview.show(false, index[i + 1].key) }
+    /* try to find next/prev ids in deck */
+    let prev, next, isDeck
+    for (const name in decks.data) {
+      for (const card in decks.data[name]) {
+        if (card == id) {
+          isDeck = true
+        } else if (isDeck) {
+          next = card
+          break
+        } else {
+          prev = card
+        }
+      }
+    }
+
+    /* assign prev/next to either deck or collection */
+    if (isDeck) {
+      /* set deck prev/next values if existing */
+      if (prev) btnprev.onclick = function () { preview.show(false, prev) }
+      if (next) btnnext.onclick = function () { preview.show(false, next) }
+    } else {
+      /* find next/prev ids in collection */
+      const index = sort.getSortIndex(filter.apply(collection[0]), sort.mode)
+      for (let i = 0; i < index.length; i++) {
+        if (index[i].key == id) {
+          if (index[i - 1]) btnprev.onclick = function () { preview.show(false, index[i - 1].key) }
+          if (index[i + 1]) btnnext.onclick = function () { preview.show(false, index[i + 1].key) }
+        }
       }
     }
 
