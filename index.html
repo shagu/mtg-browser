@@ -53,17 +53,25 @@
   </div>
 </div>
 
-<div id=preview onclick='preview.hide()'>
-  <img id="preview-image" src=""/>
-</div>
-
 <div id=results>
   <!-- result count goes here !-->
 </div>
 
-
 <div id=viewport>
   <!-- content goes here !-->
+</div>
+
+<div id=preview onclick='preview.hide()'>
+  <div id=preview-space>
+    <div id="preview-window" onclick='event.stopPropagation()'>
+      <a id=preview-prev class=btn><span>◄</span></a>
+      <div id=preview-content>
+        <img id="preview-image" src=""/>
+        <span id="preview-text"></span>
+      </div>
+      <a id=preview-next class=btn><span>►</span></a>
+    </div>
+  </div>
 </div>
 
 <div id=deckbuilder>

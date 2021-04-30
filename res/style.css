@@ -414,25 +414,142 @@ body {
 #preview {
   z-index: 5;
   visibility: hidden;
-  background: rgba(0,0,0,.5);
+  background: rgba(0,0,0,.6);
   width: 100%;
   height: 100%;
   position: fixed;
   top: 0;
 }
 
-#preview-image {
+#preview-space {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+}
+
+#preview-window {
+  display: flex;
+  flex-wrap: nowrap;
   position: absolute;
   left: 50%;
   top: 50%;
   -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
 
+  height: 500px;
   border: 1px #444 solid;
-  padding: 5px;
-  background: #000;
+}
 
-  height: 50%;
+#preview-content {
+  display: flex;
+  flex-wrap: nowrap;
+  height: 100%;
+  padding: 20px;
+  background: #000;
+  box-shadow: 0px 0px 10px #000;
+  border: 1px #444 solid;
+  margin-top: -20px;
+}
+
+#preview-image {
+  height: calc(100% - 10px);
+  background: #fff;
+  padding: 5px;
+  border-radius: 15px;
+}
+
+#preview-text {
+  display: inline-block;
+  width: 400px;
+  height: 100%;
+  color: #fff;
+  padding: 0px 10px;
+}
+
+#preview-text span.title{
+  padding: 0 0 10px 10px;
+  display: block;
+  font-size: 18pt;
+  font-weight: bold;
+  color: #fff;
+}
+
+#preview-text span.title small{
+  font-weight: 300;
+  color: #fff;
+}
+
+
+#preview-text span.types{
+  padding: 10px;
+  display: block;
+  font-size: 14pt;
+}
+
+#preview-text span.text{
+  padding: 20px;
+  display: block;
+  font-size: 12pt;
+}
+
+#preview-text span.lookup{
+  padding: 10px;
+  display: block;
+  font-size: 12pt;
+  font-weight: bold;
+}
+
+#preview-text span.lookup a{
+  display: inline-block;
+  padding: 5px 0px;
+  font-size: 12pt;
+  color: #3fc;
+  text-decoration: none;
+}
+
+#preview-text span.lookup a{
+  text-decoration: underline;
+}
+
+#preview-filename {
+  display: block;
+  position: absolute;
+  bottom: 0px;
+  color: #555;
+  font-style: italic;
+  padding-top: 10px;
+  margin-left: 10px;
+  border-top: 1px #222 solid;
+  width: 380px;
+}
+
+#preview a.btn {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  height: 100%;
+  text-decoration: none;
+  color: #555;
+  background: rgba(15, 15, 15, .9);
+  cursor: pointer;
+}
+
+#preview a.btn:hover {
+  color: #fff;
+}
+
+#preview a.btn span {
+  padding: 15px;
+  font-weight: bold;
+  font-size: 16pt;
+  user-select: none;
+}
+
+#preview-prev {
+}
+
+#preview-next {
 }
 
 /* mobile view */

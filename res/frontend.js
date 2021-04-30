@@ -222,11 +222,44 @@ const convert = {
 /* preview popup */
 const preview = {
   show: function (self, id) {
-    const preview = document.getElementById('preview')
+    const previewframe = document.getElementById('preview')
     const image = document.getElementById('preview-image')
+    const text = document.getElementById('preview-text')
+    const filename = document.getElementById('preview-filename')
+
+    const btnprev = document.getElementById('preview-prev')
+    const btnnext = document.getElementById('preview-next')
+
+    const card = collection[0][id]
+    if (card !== 'undefined') {
+      text.innerHTML = `
+      <span class='title'>${card.name || ''}${card.name_loc ? '<br/><small>(' + card.name_loc + ')</small>' : ''}</span>
+      <span class='types'>${card.types || ''}</span>
+      <span class='text'>${card.text || ''}</span>
+      <span class='lookup'>Lookup:
+      <ul>
+        <li><a href='https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=${card.multiverse}'>gatherer.wizards</a></li>
+        <li><a href='https://scryfall.com/card/${card.scryfall}'>scryfall</a></li>
+      </ul>
+      </span>
+
+      <span id="preview-filename">${id}</span>
+      `
+    }
+
+    /* find next/prev ids and set buttons */
+    const index = sort.getSortIndex(collection, sort.mode)
+    for (let i = 0; i < index.length; i++) {
+      if (index[i].key == id) {
+        btnprev.onclick = function () { preview.show(false, index[i - 1].key) }
+        btnnext.onclick = function () { preview.show(false, index[i + 1].key) }
+      }
+    }
+
     image.src = 'collection/' + id + '.jpg'
-    preview.style.visibility = 'visible'
+    previewframe.style.visibility = 'visible'
   },
+
   hide: function (self, id) {
     const preview = document.getElementById('preview')
     preview.style.visibility = 'hidden'
@@ -253,7 +286,7 @@ const decks = {
 
     export: function () {
       const button = document.getElementById('deck-export')
-      let content = 'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(decks.data))
+      const content = 'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(decks.data))
       button.setAttribute('href', content)
       button.setAttribute('download', 'mtgb-decks.json')
     }
@@ -263,6 +296,7 @@ const decks = {
     const deckbuilder = document.getElementById('deckbuilder')
     const button = document.getElementById('deckbuilder-toggle')
     const viewport = document.getElementById('viewport')
+    const preview = document.getElementById('preview-space')
 
     const content = document.getElementById('decks')
     const toolbar = document.getElementById('decks-toolbar')
@@ -270,12 +304,14 @@ const decks = {
     if (deckbuilder.style.width === '60px' || !deckbuilder.style.width) {
       deckbuilder.style.width = '500px'
       viewport.style.width = 'calc(100% - 500px)'
+      preview.style.width = 'calc(100% - 500px)'
       button.innerHTML = '▼ Decks'
       content.style.display = 'block'
       toolbar.style.display = 'block'
     } else {
       deckbuilder.style.width = '60px'
       viewport.style.width = 'calc(100% - 55px)'
+      preview.style.width = '100%'
       button.innerHTML = '▲ Decks'
       content.style.display = 'none'
       toolbar.style.display = 'none'
