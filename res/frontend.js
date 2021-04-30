@@ -236,10 +236,10 @@ const preview = {
   setbutton: function (element, entry) {
     if (entry) {
       element.onclick = function () { preview.show(false, entry) }
-      element.style.visibility = 'visible'
+      element.style.display = 'flex'
     } else {
       element.onclick = ''
-      element.style.visibility = 'hidden'
+      element.style.display = 'none'
     }
   },
 
