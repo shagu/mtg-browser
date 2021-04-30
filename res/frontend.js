@@ -260,6 +260,47 @@ const preview = {
     }
   },
 
+  neighbors: function (where, id) {
+    let prev, current, next
+
+    if (where === 'deck') {
+      for (const name in decks.data) {
+        if (decks.data[name][id]) {
+          const keys = Object.keys(decks.data[name])
+          prev = keys[keys.indexOf(id) - 1]
+          next = keys[keys.indexOf(id) + 1]
+          break
+        }
+      }
+    } else if (where === 'collection') {
+      /* create decklist array */
+      const decklist = []
+      for (const name in decks.data) {
+        for (const card in decks.data[name]) {
+          decklist[card] = true
+        }
+      }
+
+      /* iterate collection */
+      const index = sort.getSortIndex(filter.apply(collection[0]), sort.mode)
+      for (let i = 0; i < index.length; i++) {
+        if (index[i].key == id) {
+          current = index[i].key
+        } else if (!current && !decklist[index[i].key]) {
+          prev = index[i].key
+        } else if (current && !decklist[index[i].key]) {
+          next = index[i].key
+          break
+        }
+      }
+    }
+
+    return {
+      prev: prev,
+      next: next
+    }
+  },
+
   show: function (self, id) {
     const previewframe = document.getElementById('preview')
     const image = document.getElementById('preview-image')
