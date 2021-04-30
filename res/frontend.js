@@ -177,7 +177,7 @@ const sort = {
 
 /* all kind of converter functions */
 const convert = {
-  manaStringHTML: function (str) {
+  parse: function (str) {
     if (!str) { return str }
     // replace known mana symbols
     str = str.replaceAll('{B}', '<img class="mana" src=res/black.png>')
@@ -600,7 +600,7 @@ const decks = {
 
         const mana = document.createElement('span')
         mana.classList = 'deck-card-mana'
-        mana.innerHTML = convert.manaStringHTML(collection[0][id].mana)
+        mana.innerHTML = convert.parse(collection[0][id].mana)
         card.appendChild(mana)
 
         /* add cmc calc */
