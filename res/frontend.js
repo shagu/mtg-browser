@@ -193,16 +193,15 @@ const convert = {
 
     return str
   },
-  manaStringHex: function (str) {
-    if (!str) {
-      return '#876543' /* land */
-    }
+
+  colorStringToHex: function (str) {
+    if (!str) return '#876543'
 
     let last
     let multi = false
     let artifact = false
-    str = str.replaceAll('{X}', '{0}')
-    const matches = str.match(/{[A-Za-z]}/g)
+    const matches = str.match(/[A-Za-z]/g)
+    console.log(str)
 
     if (matches) {
       matches.forEach((match) => {
@@ -220,12 +219,17 @@ const convert = {
     } else if (artifact) {
       return '#969ea1'
     } else {
-      switch (str.match(/{[A-Za-z]}/g)[0]) {
-        case '{B}': return '#55524a'
-        case '{U}': return '#0780c4'
-        case '{G}': return '#017d49'
-        case '{R}': return '#f6452a'
-        case '{W}': return '#eae8e4'
+      /* remove brackets from cmc strings */
+      str = str.replaceAll('{', '')
+      str = str.replaceAll('}', '')
+
+      /* return single-color code */
+      switch (str.match(/[A-Za-z]/g)[0]) {
+        case 'B': return '#55524a'
+        case 'U': return '#0780c4'
+        case 'G': return '#017d49'
+        case 'R': return '#f6452a'
+        case 'W': return '#eae8e4'
       }
     }
   }
@@ -511,7 +515,7 @@ const decks = {
         const isLand = collection[0][id].types.toLowerCase().includes('land')
 
         const card = document.createElement('div')
-        card.style.backgroundColor = convert.manaStringHex(collection[0][id].mana)
+        card.style.backgroundColor = convert.colorStringToHex(collection[0][id].color)
         card.className = 'deck-card'
 
         const remove = document.createElement('span')
