@@ -292,7 +292,6 @@ const decks = {
     },
 
     onReaderLoad: function (event) {
-      console.log(event.target.result)
       decks.data = JSON.parse(event.target.result)
       decks.reload()
     },
