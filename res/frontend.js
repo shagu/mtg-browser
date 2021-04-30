@@ -233,6 +233,16 @@ const convert = {
 
 /* preview popup */
 const preview = {
+  setbutton: function (element, entry) {
+    if (entry) {
+      element.onclick = function () { preview.show(false, entry) }
+      element.style.visibility = 'visible'
+    } else {
+      element.onclick = ''
+      element.style.visibility = 'hidden'
+    }
+  },
+
   show: function (self, id) {
     const previewframe = document.getElementById('preview')
     const image = document.getElementById('preview-image')
@@ -275,15 +285,15 @@ const preview = {
     /* assign prev/next to either deck or collection */
     if (isDeck) {
       /* set deck prev/next values if existing */
-      if (prev) btnprev.onclick = function () { preview.show(false, prev) }
-      if (next) btnnext.onclick = function () { preview.show(false, next) }
+      preview.setbutton(btnprev, prev)
+      preview.setbutton(btnnext, next)
     } else {
       /* find next/prev ids in collection */
       const index = sort.getSortIndex(filter.apply(collection[0]), sort.mode)
       for (let i = 0; i < index.length; i++) {
         if (index[i].key == id) {
-          if (index[i - 1]) btnprev.onclick = function () { preview.show(false, index[i - 1].key) }
-          if (index[i + 1]) btnnext.onclick = function () { preview.show(false, index[i + 1].key) }
+          preview.setbutton(btnprev, index[i - 1] ? index[i - 1].key : false)
+          preview.setbutton(btnnext, index[i + 1] ? index[i + 1].key : false)
         }
       }
     }

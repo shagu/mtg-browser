@@ -436,6 +436,7 @@ body {
   top: 50%;
   -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
+  background: rgba(15, 15, 15, .9);
 
   height: 500px;
   border: 1px #444 solid;
@@ -531,7 +532,6 @@ body {
   height: 100%;
   text-decoration: none;
   color: #555;
-  background: rgba(15, 15, 15, .9);
   cursor: pointer;
 }
 
