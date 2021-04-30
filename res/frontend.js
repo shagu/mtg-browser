@@ -258,6 +258,19 @@ const preview = {
 
     image.src = 'collection/' + id + '.jpg'
     previewframe.style.visibility = 'visible'
+
+    window.onkeydown = function (event) {
+      if (event.keyCode === 27) {
+        event.preventDefault()
+        preview.hide()
+      } else if (event.keyCode === 37) {
+        event.preventDefault()
+        btnprev.click()
+      } else if (event.keyCode === 39) {
+        event.preventDefault()
+        btnnext.click()
+      }
+    }
   },
 
   hide: function (self, id) {
