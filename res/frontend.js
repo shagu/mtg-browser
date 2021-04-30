@@ -215,7 +215,6 @@ const convert = {
     let multi = false
     let artifact = false
     const matches = str.match(/[A-Za-z]/g)
-    console.log(str)
 
     if (matches) {
       matches.forEach((match) => {
