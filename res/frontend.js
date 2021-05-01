@@ -216,6 +216,14 @@ const convert = {
       return `<div class="ability"><span class="ability-icon">${value}</span><span class="ability-text">${text}</span></div>`
     })
 
+    // text in brackets is usually italic
+    str = str.replaceAll(/\((.+)\)/g, (str, value) => {
+      return `<span style='font-style: italic;'><small>(${value})</small></span>`
+    })
+
+    // linebreak to <br>
+    str = str.replaceAll('\n', '\n<br/><br/>')
+
     return str
   },
 
