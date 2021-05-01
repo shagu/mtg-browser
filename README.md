@@ -2,11 +2,18 @@
 
 A small node.js project that allows to export scans of your [Magic: The Gathering](https://magic.wizards.com) card collection to plain images and a simple and responsive html-site to browse, filter and search for specific cards. One of the goals is, to make it easier to build decks out of your local collection and to keep track of your cards. This is the successor of [delver-export](https://github.com/shagu/delverexport) and a partial rewrite from [Lua](https://www.lua.org) to [Node.js](https://nodejs.org). Please bear with me, you will see many bad coding habits, I'm a JS novice and learning by doing.
 
-*As of now, the `master`-branch is considered as development branch, where you possibly see broken fragments of new features I started on, but haven't finished yet.*
+## Preview
 
-### Supported Card Scanners
+Once the `make` command returned successfully, the local "[index.html](index.html)" can be opened in any browser, to display the frontend:
 
-  - [DelverLens](https://www.delverlab.com) - MTG Card Scanner
+![preview.jpg](preview.jpg)
+
+The files in the `./collection` folder, have the following format: "`{Color} Name {Type} (count)`", where "count" is an increasing identifier for each duplicate card:
+
+![files.png](files.png)
+
+**To see the mtg-browser frontend in action, visit [MTG Browser Demo](https://shagu.github.io/mtg-browser-demo/). This is an example output of the
+"`make www`" target uploaded to GitHub Pages.**
 
 ## Install
 
@@ -28,15 +35,9 @@ Possible `make` targets are:
   - "`make distclean`" - *Clean the `./collection` folder and reset everything done by `make update`*
   - "`make www`" - *Runs update, clean, core and copies website related files into the `www/` folder*
 
-## Preview
+### Supported Card Scanners
 
-Once the `make` command returned successfully, the local "[index.html](index.html)" can be opened in any browser, to display the frontend:
-
-![preview.jpg](preview.jpg)
-
-The files in the `./collection` folder, have the following format: "`{Color} Name {Type} (count)`", where "count" is an increasing identifier for each duplicate card:
-
-![files.png](files.png)
+  - [DelverLens](https://www.delverlab.com) - MTG Card Scanner
 
 ## Thanks
 
