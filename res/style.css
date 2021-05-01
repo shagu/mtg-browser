@@ -539,14 +539,7 @@ div.ability span.ability-text {
   width: 16px;
 }
 
-#preview-text span.lookup{
-  padding: 10px;
-  display: block;
-  font-size: 12pt;
-  font-weight: bold;
-}
-
-#preview-text span.lookup a{
+#preview-lookup a{
   display: inline-block;
   padding: 5px 0px;
   font-size: 12pt;
@@ -554,16 +547,15 @@ div.ability span.ability-text {
   text-decoration: none;
 }
 
-#preview-text span.lookup a{
+#preview-lookup a:hover{
   text-decoration: underline;
 }
 
-#preview-filename {
+#preview-lookup {
   display: block;
   position: absolute;
   bottom: 0px;
   color: #555;
-  font-style: italic;
   padding-top: 10px;
   margin-left: 10px;
   border-top: 1px #222 solid;

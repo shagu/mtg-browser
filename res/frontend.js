@@ -362,17 +362,16 @@ const preview = {
       previewframe.style.visibility = 'visible'
 
       text.innerHTML = `
-      <span class='title'>${card.name || ''}${card.name_loc ? '<br/><small>(' + card.name_loc + ')</small>' : ''}</span>
+      <span class='title'>${card.name || ''}${card.name_loc ? '<br/><small style="color: #aaa;">(' + card.name_loc + ')</small>' : ''}</span>
       <span class='types'>${card.types || ''}</span>
       <span class='text'>${convert.parse(card.text) || ''}</span>
-      <span class='lookup'>Lookup:
-      <ul>
-        <li><a href='https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=${card.multiverse}'>gatherer.wizards</a></li>
-        <li><a href='https://scryfall.com/card/${card.scryfall}'>scryfall</a></li>
-      </ul>
-      </span>
 
-      <span id="preview-filename">${id}</span>
+      <span id="preview-lookup">
+      Lookup:
+        <a href='https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=${card.multiverse}'>gatherer.wizards</a>
+        <small>|</small>
+        <a href='https://scryfall.com/card/${card.scryfall}'>scryfall</a>
+      </span>
       `
     }
 
