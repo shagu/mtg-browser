@@ -197,11 +197,17 @@ const convert = {
     str = str.replaceAll('{W/B}', '<img class="mana" src=res/white-black.png>')
     str = str.replaceAll('{W/U}', '<img class="mana" src=res/white-blue.png>')
 
+    str = str.replaceAll('{C}', '<img class="mana" src=res/colorless.png>')
     str = str.replaceAll('{S}', '<img class="mana" src=res/snow.png>')
     str = str.replaceAll('{T}', '<img class="mana" src=res/tap.png>')
 
     // replace colorless mana
-    str = str.replaceAll(/{(.+)}/g, (str, value) => {
+    str = str.replaceAll(/{([0-9])}/g, (str, value) => {
+      return '<span class="mana">' + value + '</span>'
+    })
+
+    // replace X amount and others
+    str = str.replaceAll(/{([A-Za-z])}/g, (str, value) => {
       return '<span class="mana">' + value + '</span>'
     })
 
