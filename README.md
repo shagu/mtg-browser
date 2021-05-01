@@ -8,16 +8,26 @@ To see the mtg-browser frontend in action, visit the **[MTG Browser Demo Website
 
 [![preview.jpg](preview.jpg)](https://shagu.github.io/mtg-browser-demo/)
 
-## Install
+## How-To-Use
 
-    git clone https://github.com/shagu/mtg-browser
-    cd mtg-browser
-    npm install
+1. Scan your cards with [DelverLens](https://www.delverlab.com)
+2. Inside the app, export your collection ("Create Backup File")
+3. On your PC, Install `mtg-browser`:
 
-Now place your DelverLens backup file and the latest APK into the "`input`" directory (Check the [the input readme](input/README.md) for further details).
-To start the process to prepare your collection, type:
+```
+git clone https://github.com/shagu/mtg-browser
+cd mtg-browser
+npm install
+```
 
-    make
+4. Now place the backup file and the latest [DelverLens APK](https://apps.evozi.com/apk-downloader/?id=delverlab.delverlens) into the "`input`" directory
+5. To run the mtg-browser tool, type:
+
+```
+make
+```
+
+6. Open the `index.html`, done
 
 Possible `make` targets are:
 
