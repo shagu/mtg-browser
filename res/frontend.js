@@ -200,9 +200,14 @@ const convert = {
     str = str.replaceAll('{S}', '<img class="mana" src=res/snow.png>')
     str = str.replaceAll('{T}', '<img class="mana" src=res/tap.png>')
 
-    // replace remaining occurrences
+    // replace colorless mana
     str = str.replaceAll(/{(.+)}/g, (str, value) => {
       return '<span class="mana">' + value + '</span>'
+    })
+
+    // replace planeswalker abilities
+    str = str.replaceAll(/\[(.+)\]:(.+)(?:$|\n)/g, (str, value, text) => {
+      return `<div class="ability"><span class="ability-icon">${value}</span><span class="ability-text">${text}</span></div>`
     })
 
     return str

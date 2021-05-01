@@ -53,6 +53,34 @@ img.mana {
   width: 20px;
 }
 
+div.ability {
+  padding: 2px;
+  margin: 10px;
+  display: flex;
+}
+
+div.ability span.ability-icon {
+  border: 1px #444 solid;
+  border-radius: 5px;
+  padding: 5px;
+  height: 20px;
+  width: 30px;
+  min-width: 30px;
+  font-size: 10pt;
+  font-weight: bold;
+  text-align: center;
+  color: #fff;
+}
+
+div.ability span.ability-text {
+  background: #222;
+  border-radius: 5px;
+  padding: 5px;
+  width: 100%;
+  margin-left: 10px;
+}
+
+
 /* navigation bar */
 #navbar {
   color: #fff;
