@@ -4,16 +4,9 @@ A small node.js project that allows to export scans of your [Magic: The Gatherin
 
 ## Preview
 
-Once the `make` command returned successfully, the local "[index.html](index.html)" can be opened in any browser, to display the frontend:
+To see the mtg-browser frontend in action, visit the **[MTG Browser Demo Website](https://shagu.github.io/mtg-browser-demo/)**. The page is showcasing an example output of the `make www` command, using a subset of some of my legacy cards, that was then uploaded to GitHub Pages.
 
-![preview.jpg](preview.jpg)
-
-The files in the `./collection` folder, have the following format: "`{Color} Name {Type} (count)`", where "count" is an increasing identifier for each duplicate card:
-
-![files.png](files.png)
-
-**To see the mtg-browser frontend in action, visit [MTG Browser Demo](https://shagu.github.io/mtg-browser-demo/). This is an example output of the
-"`make www`" target uploaded to GitHub Pages.**
+[![preview.jpg](preview.jpg)](https://shagu.github.io/mtg-browser-demo/)
 
 ## Install
 
