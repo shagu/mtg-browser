@@ -27,16 +27,19 @@ npm install
 make
 ```
 
-6. Open the `index.html`, done
+6. Open the `index.html`, **done!**
 
+### Make targets
 Possible `make` targets are:
 
-  - "`make`" - *Runs update, clean and core*
-  - "`make update`" - *Download MTGJSON data, extract Delver's built-in database and prepares your backup*
-  - "`make core`" - *Only run the main programm*
-  - "`make clean`" - *Clean the `./collection` folder*
-  - "`make distclean`" - *Clean the `./collection` folder and reset everything done by `make update`*
-  - "`make www`" - *Runs update, clean, core and copies website related files into the `www/` folder*
+```
+make            - Runs update, clean and core
+make update     - Download MTGJSON data, extract Delver's built-in database and prepares your backup
+make core       - Only run the main programm
+make clean      - Clean the `./collection` folder
+make distclean  - Clean the `./collection` folder and reset everything done by `make update`
+make www        - Runs update, clean, core and copies website related files into the `www/` folder
+```
 
 ### Supported Card Scanners
 
