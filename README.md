@@ -47,5 +47,8 @@ make www        - Runs update, clean, core and copies website related files into
 
 ## Thanks
 
+- **MTGJSON**
+The [MTGJSON Project](https://github.com/mtgjson/mtgjson) is a community driven database, containing nearly all MTG cards and their informations, such as card texts, colors and so on. All metadata that is used in mtg-browse is obtained from this database.
+
 - **Delver Lens**
 It's by far the best card scanner and organizer out there - even without being opensource (maybe one day?). If you have an Android-Phone and no card scanner yet, get it now! I have tried many apps, but delver lens stands out for its good organized interface, the card detection algorithm and especially the clean sqlite-export of collections.
